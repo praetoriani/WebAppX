@@ -107,7 +107,6 @@ body{
   display:flex;
   flex-direction:column;
   /* CRITICAL: no overflow:hidden here – let children control scroll */
-  overflow:hidden;
 }
 button,input,select{font:inherit;color:inherit;cursor:pointer}
 button{background:none;border:none}
@@ -422,10 +421,9 @@ button{background:none;border:none}
 .dash-card-sub{font-size:10px;color:var(--text-faint);margin-top:.1rem}
 
 /* Category breakdown */
-.dash-cat-grid{display:flex;flex-direction:column;gap:.5rem}
-.dash-cat-row{
+.dash-cat-grid{display:flex;flex-direction:column;gap:0.875rem}.dash-cat-row{
   display:flex;align-items:center;gap:.75rem;
-  padding:.5rem .75rem;
+  padding:0.5rem;
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r-lg);
 }
