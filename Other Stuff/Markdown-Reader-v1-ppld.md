@@ -1,9 +1,5 @@
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
 
-# Bitte erstelle eine modern aussehende WebApp, mit der es möglich ist, Markdown-Dateien anzuzeigen und zu lesen. Die WebApp soll zwei Frames haben. Links ein Menü-Frame, welcher die einzelnen Überschriften aus einer MD-Datei Strukturiert darstellt (um schneller zu einem bestimmten Punkt zu springen). Rechts der Content-Frame, welcher die eigentliche MD-Datei rendert. Oberhalb der beiden Frames soll eine Tool-Leiste mit Buttons sein. Ein Button soll lokale MD-Dateien laden und ein anderer Button soll MDH-Dateien von einer URL laden. Es wäre toll, wenn das Design/UI der WebApp in einer Arr DarkMode wäre, aber trotzdem ein modernes, ansprechendes und benutzerfreundliches Interface bietet. Vielen lieben Dank für deine Hilfe und Unterstützung
-
-Hier ist deine fertige **MarkdownReader WebApp** — eine einzelne `.html`-Datei, die du direkt im Browser öffnen kannst, ohne Server oder Installation.
-
 ***
 
 ## Was die App kann

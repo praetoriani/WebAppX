@@ -1,19 +1,6 @@
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
 
-# Ein Kunde sucht nach einer Möglichkeit, für seine Mitarbeiter eine zentrale ToDo App auf Basis einer WebApp zur Verfügung zu stellen. Diese WebApp sollte folgende Grundvoraussetzungen erfüllen.
-
-- Sie sollte in einer XAMP-Umgebung laufen (welche auf einer virtuellen VSphere-Umgebung als virueller Server läuft und im Netzwerk unter einer entsprechenden URL verfügbar ist).
-- Die WebApp sollte in der Lage sein, mehrere ToDo Listen verwalten zu können
-- Die WebApp sollte in der Lage sein, den Status der einzelnen ToDo Listen zu speichern
-- Die Daten der WebApp sollten am Besten persistent gespeichert werden (local storage browser datenbank?)
-- Die WebApp soll ein modernes Aussehen haben, mit UI-Effekten (Hover-, Slide-Effekte, etc.) arbeiten und es muss die Möglichkeit geben, zwischen einem Dark Mode und einem Light Mode zu wechseln.
-- Die WebApp soll vollständig auf deutsch sein.
-
-Bitte erstelle mir eine erste, Version einer solchen WebApp (die nach Möglichkeit die Meisten ... im optimalfall alle Funktionen von oben enthält), damit ich einfach mal sehe, wie so etwas aussehen kann.
-
-Vielen lieben Dank für deine Hilfe und deine Unterstützung
-
-Hier ist deine fertige ToDo-WebApp! Die Datei einfach in den `htdocs`-Ordner deiner XAMPP-Instanz legen und im Browser öffnen – fertig.
+***
 
 ## Was die App alles kann
 
