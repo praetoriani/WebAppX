@@ -73,7 +73,8 @@ Just open the file in any modern browser – no installation or build step requi
 - Translated all task titles and descriptions to English
 - **Scroll functionality fix:** removed `overflow:hidden` from `body{}` to enable proper vertical scrolling in both Tasks and Dashboard views
 - **Dashboard category layout optimization:** increased gap between category columns to `0.875rem` for better visual separation
-- **Category row spacing:** standardized padding to `0.5rem` for consistent spacing and better touch targets
+- **Category row spacing:** standardized padding to `0.5rem` for consistent spacing and better 
+- **CSS Grid Layout implementation:** restructured app layout using CSS Grid for proper frame-based structure (sidebar, header, scrollable content, status bar)touch targets
 
 ### v1.00.01 (2026-04-12)
 - Initial release based on PSAppRocket-ToDo-Demo
