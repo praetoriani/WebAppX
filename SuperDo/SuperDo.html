@@ -236,6 +236,7 @@ button{background:none;border:none}
   flex:1;
   overflow-y:auto;
   overflow-x:hidden;
+  min-height:0; /* CRITICAL FIX for flex-child scroll */
   /* No padding-bottom here; each view manages its own spacing */
 }
 .page-body::-webkit-scrollbar{width:5px}
