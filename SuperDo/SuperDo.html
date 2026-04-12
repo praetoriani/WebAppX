@@ -132,7 +132,7 @@ button{background:none;border:none}
   transition:transform 320ms cubic-bezier(.16,1,.3,1), width 320ms cubic-bezier(.16,1,.3,1);
   overflow:hidden;
   z-index:200;
-  position:relative;
+  position:sticky;top:0;height:100vh
 }
 .sidebar.collapsed{
   transform:translateX(calc(-1 * var(--sidebar-width)));
@@ -436,6 +436,7 @@ button{background:none;border:none}
 /* ============ STATUS BAR (bottom) ============ */
 .status-bar{
   flex-shrink:0;height:36px;
+    position:sticky;bottom:0;
   background:var(--surface);border-top:1px solid var(--border);
   display:flex;align-items:center;padding:0 1rem;gap:.875rem;
   overflow:hidden;font-size:11px;z-index:50;
