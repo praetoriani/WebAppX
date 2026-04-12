@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="dark">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SuperDo – Task Manager</title>
-<!-- Version: v1.00.01 -->
+<!-- Version: v1.00.02 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root,[data-theme="light"]{
-  --bg:#f7f6f2;--surface:#f9f8f5;--surface-2:#fbfbf9;--surface-off:#ede9e3;--surface-dyn:#e4e0d9;
-  --border:rgba(40,37,29,0.12);--divider:rgba(40,37,29,0.08);
-  --text:#28251d;--text-muted:#6b6860;--text-faint:#b0afa9;--text-inv:#f5f4f0;
-  --primary:#01696f;--primary-h:#0c4e54;--primary-hl:#ced8d7;
+  --bg:#f4f6fb;--surface:#f8f9fd;--surface-2:#fbfcfe;--surface-off:#eaecf4;--surface-dyn:#dde1ef;
+  --border:rgba(30,40,80,0.11);--divider:rgba(30,40,80,0.07);
+  --text:#1a2240;--text-muted:#5a6380;--text-faint:#a8afc8;--text-inv:#f0f2fa;
+  --primary:#0059b3;--primary-h:#003d80;--primary-hl:#ccddf5;
   --error:#a12c7b;--error-hl:#e8d0dd;
   --warn:#964219;--warn-hl:#ded0c8;
   --success:#437a22;--success-hl:#d3dfcc;
   --orange:#da7101;--orange-hl:#e8d9c5;
   --purple:#7a39bb;--purple-hl:#dbd0e0;
-  --shadow-sm:0 1px 3px rgba(40,37,29,.07);
-  --shadow-md:0 4px 14px rgba(40,37,29,.09);
-  --shadow-lg:0 12px 36px rgba(40,37,29,.13);
+  --shadow-sm:0 1px 3px rgba(30,40,80,.07);
+  --shadow-md:0 4px 14px rgba(30,40,80,.10);
+  --shadow-lg:0 12px 36px rgba(30,40,80,.14);
   --r-sm:.375rem;--r-md:.5rem;--r-lg:.75rem;--r-xl:1rem;--r-full:9999px;
   --font-body:'Inter',system-ui,sans-serif;
   --font-mono:'JetBrains Mono',monospace;
@@ -30,18 +30,18 @@
   --sidebar-width:260px;
 }
 [data-theme="dark"]{
-  --bg:#121110;--surface:#181715;--surface-2:#1d1c1a;--surface-off:#1a1917;--surface-dyn:#252321;
-  --border:rgba(255,255,255,.08);--divider:rgba(255,255,255,.05);
-  --text:#cccbc8;--text-muted:#787673;--text-faint:#525150;--text-inv:#1a1917;
-  --primary:#4f9aa5;--primary-h:#227f8b;--primary-hl:#2a3b3c;
-  --error:#d163a7;--error-hl:#4a3244;
-  --warn:#bb653b;--warn-hl:#52403a;
-  --success:#6daa45;--success-hl:#334335;
-  --orange:#fdab43;--orange-hl:#4e3d2f;
-  --purple:#a86fdf;--purple-hl:#3f3249;
-  --shadow-sm:0 1px 3px rgba(0,0,0,.25);
-  --shadow-md:0 4px 14px rgba(0,0,0,.35);
-  --shadow-lg:0 12px 36px rgba(0,0,0,.45);
+  --bg:#0d1117;--surface:#161b25;--surface-2:#1c2130;--surface-off:#181e2b;--surface-dyn:#1f2638;
+  --border:rgba(100,140,255,.09);--divider:rgba(100,140,255,.06);
+  --text:#c9d1e8;--text-muted:#6b7899;--text-faint:#3d4a68;--text-inv:#0d1117;
+  --primary:#4d94ff;--primary-h:#2070e0;--primary-hl:#1a2e4a;
+  --error:#d163a7;--error-hl:#3a2035;
+  --warn:#c97040;--warn-hl:#3d2a1e;
+  --success:#5db844;--success-hl:#1e3320;
+  --orange:#fdab43;--orange-hl:#3d2e16;
+  --purple:#a86fdf;--purple-hl:#2e2040;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.30);
+  --shadow-md:0 4px 14px rgba(0,0,0,.40);
+  --shadow-lg:0 12px 36px rgba(0,0,0,.55);
 }
 html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
 body{font-family:var(--font-body);font-size:14px;color:var(--text);background:var(--bg);min-height:100dvh;line-height:1.6;display:flex;flex-direction:column;overflow:hidden}
@@ -277,8 +277,9 @@ button{background:none;border:none}
 .empty-state p{font-size:13px}
 
 /* ============ DASHBOARD VIEW ============ */
+/* The dashboard sits inside .page-body which already scrolls */
 .dashboard{
-  padding:1.25rem 1.25rem;
+  padding:1.25rem 1.25rem 2rem;
   max-width:1200px;
   margin:0 auto;
   display:flex;
@@ -395,7 +396,7 @@ button{background:none;border:none}
   font-size:12px;
   font-weight:500;
   color:var(--text);
-  min-width:110px;
+  min-width:120px;
   flex-shrink:0;
 }
 .dash-cat-bar-wrap{
@@ -423,7 +424,7 @@ button{background:none;border:none}
 .dash-cat-done{
   font-size:10px;
   color:var(--text-faint);
-  min-width:30px;
+  min-width:34px;
   text-align:right;
   flex-shrink:0;
 }
@@ -520,7 +521,7 @@ button{background:none;border:none}
   .header{padding:.625rem 1rem;gap:.625rem}
   .filters{padding:.625rem 1rem}
   .main{padding:.875rem 1rem}
-  .dashboard{padding:1rem}
+  .dashboard{padding:1rem 1rem 2rem}
   .status-pill:nth-child(n+4){display:none}
 }
 </style>
@@ -529,7 +530,7 @@ button{background:none;border:none}
 <div class="app-shell">
 
   <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Hauptnavigation">
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main Navigation">
     <div class="sidebar-header">
       <a class="sidebar-logo" href="#">
         <svg class="sidebar-logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -542,10 +543,10 @@ button{background:none;border:none}
       </a>
     </div>
     <nav class="sidebar-nav">
-      <span class="nav-section-label">Übersicht</span>
+      <span class="nav-section-label">Overview</span>
       <button class="nav-item active" data-view="tasks" id="nav-tasks">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        Aufgaben
+        Tasks
       </button>
       <button class="nav-item" data-view="dashboard" id="nav-dashboard">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z"/></svg>
@@ -554,19 +555,19 @@ button{background:none;border:none}
       <span class="nav-section-label" style="margin-top:.75rem">Filter</span>
       <button class="nav-item" data-view="tasks" data-filter-prio="critical" id="nav-critical">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        Kritisch
+        Critical
       </button>
       <button class="nav-item" data-view="tasks" data-filter-status="open" id="nav-open">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-        Offen
+        Open
       </button>
       <button class="nav-item" data-view="tasks" data-filter-status="done" id="nav-done">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-        Erledigt
+        Completed
       </button>
     </nav>
     <div class="sidebar-footer">
-      <div class="sidebar-version">SuperDo v1.00.01</div>
+      <div class="sidebar-version">SuperDo v1.00.02</div>
       <div style="margin-top:.2rem">PSAppRocket · WebAppX</div>
     </div>
   </aside>
@@ -579,18 +580,18 @@ button{background:none;border:none}
 
     <!-- HEADER -->
     <header class="header">
-      <button class="btn-sidebar-toggle" id="btnSidebarToggle" aria-label="Seitenleiste ein-/ausblenden">
+      <button class="btn-sidebar-toggle" id="btnSidebarToggle" aria-label="Toggle sidebar">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
       <span class="header-title">SuperDo</span>
       <div class="header-center">
         <div class="search-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <input class="search" type="text" id="searchInput" placeholder="Aufgabe suchen…" autocomplete="off">
+          <input class="search" type="text" id="searchInput" placeholder="Search tasks…" autocomplete="off">
         </div>
       </div>
       <div class="header-right">
-        <button class="btn-icon" id="themeToggle" aria-label="Theme wechseln">
+        <button class="btn-icon" id="themeToggle" aria-label="Toggle theme">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
         <button class="btn-export" id="exportBtn">↓ CSV</button>
@@ -630,12 +631,106 @@ button{background:none;border:none}
 // ============================================================
 // DATA
 // ============================================================
-const TODOS = {"Phase 1: Projektstruktur & Grundgerüst": [["P1-01", "Verzeichnisstruktur anlegen", "Alle Ordner erstellen: PSAppRocket (root), logfiles, profiles, settings", "critical", "structure"], ["P1-02", "Hauptskript psapp.rocket.ps1 anlegen", "Leere Datei mit Kommentar-Header im eigenen Coding-Stil anlegen (Version, Autor, Datum, Beschreibung)", "critical", "structure"], ["P1-03", "psapp.profiledb.conf anlegen", "Leere Konfig-Datei im Wurzelverzeichnis erstellen; Format: ProfileName;Dateiname.config.ps1", "critical", "structure"], ["P1-04", "Core-Modul-Dateien im .core\\-Unterverzeichnis anlegen", "Dateien: psapp.logging.ps1, psapp.profile.ps1, psapp.launcher.ps1, psapp.ui.ps1, psapp.validation.ps1", "critical", "structure"], ["P1-05", "Dot-Sourcing aller Core-Module in psapp.rocket.ps1 implementieren", "Alle .core\\-Dateien via . $PSScriptRoot\\... einbinden, Fehler beim Laden abfangen", "critical", "structure"], ["P1-06", "Globale Konstanten und Variablen definieren", "$PSAR_VERSION, $PSAR_ROOT, $PSAR_PROFILES_DIR, $PSAR_LOGFILES_DIR, $PSAR_SETTINGS_DIR, $PSAR_PROFILEDB, $PSAR_MAX_PROFILES, $PSAR_MAX_LOGS", "high", "structure"], ["P1-07", "PSARreturn-Objekt-Typ definieren und implementieren", "Einheitliches Rückgabeobjekt (nach PSAppCoreLib-Vorbild): .Success [bool], .Message [string], .Data [object], .ErrorCode [int]", "critical", "structure"]], "Phase 2: Parameter-Handling & Validierung": [["P2-01", "CmdletBinding + ParameterSets definieren", "Parameter Sets: 'Run', 'AddProfile', 'DelProfile', 'Backup', 'Restore' — jeder Set schließt die anderen aus", "critical", "params"], ["P2-02", "-ProfileID [string] implementieren (Mandatory, Set: Run)", "Validierung: String nicht leer, keine Sonderzeichen außer - und _, max. 50 Zeichen", "critical", "params"], ["P2-03", "-Mode [string] implementieren (Mandatory, Set: Run)", "ValidateSet: 'GUI', 'Console', 'Taskbar', 'Hidden' — case-insensitiv", "critical", "params"], ["P2-04", "-NoLogs [switch] implementieren (Optional, Set: Run)", "Standardmäßig false; wenn gesetzt, wird kein Logfile erstellt", "medium", "params"], ["P2-05", "-AddProfile [switch] implementieren (Set: AddProfile)", "Nur gültig zusammen mit -NewProfileID; Prüfung via ParameterSet-Binding", "high", "params"], ["P2-06", "-NewProfileID [string] implementieren (Set: AddProfile)", "Validierungsregex: ^[a-zA-Z0-9_-]{1,50}$ — keine Leerzeichen, keine Sonderzeichen außer - und _", "high", "params"], ["P2-07", "-DelProfile [string] implementieren (Optional, Set: DelProfile)", "Prüfung ob Profil in profiledb.conf UND als .ps1-Datei existiert; kein Confirm-Dialog (by design)", "high", "params"], ["P2-08", "Zukünftige Parameter als Platzhalter definieren", "-Backup, -BackupDir, -Restore, -RestoreFile als Parameter-Platzhalter mit Write-Warning 'Not yet implemented'", "low", "params"], ["P2-09", "Parametervalidierung zentralisieren", "Funktion Invoke-PSARParameterValidation in psapp.validation.ps1 — alle Checks an einem Ort", "high", "params"]], "Phase 3: Profil-Management": [["P3-01", "Funktion New-PSARProfile implementieren", "Erstellt neues Profil: Validierung NewProfileID, Prüfung Duplikat in profiledb.conf (case-insensitiv), Template-Datei erzeugen, profiledb.conf aktualisieren", "critical", "profile"], ["P3-02", "Profil-Template-Datei definieren und implementieren", "Template enthält: PSCustomObject-Array $AppLoader, 3 auskommentierte Beispieleinträge mit allen Feldern, ausführliche Inline-Kommentare auf Englisch", "critical", "profile"], ["P3-03", "Profil-Dateiformat von String-Array auf PSCustomObject-Array migrieren", "Format: [PSCustomObject]@{ProgramName=''; ExePath=''; RunAs='AsUser'; WindowStyle='Normal'; WaitMillisecs=0}", "critical", "profile"], ["P3-04", "Funktion Remove-PSARProfile implementieren", "Prüft Existenz in profiledb.conf + Datei, löscht beides ohne Rückfrage, gibt PSARreturn zurück", "high", "profile"], ["P3-05", "Funktion Get-PSARProfile implementieren", "Lädt eine Profildatei, validiert die Struktur, gibt Array von PSCustomObjects zurück", "critical", "profile"], ["P3-06", "Funktion Get-PSARAllProfiles implementieren", "Liest psapp.profiledb.conf, gibt Liste aller verfügbaren Profile zurück", "medium", "profile"], ["P3-07", "Funktion Update-PSARProfileDB implementieren", "Liest, aktualisiert und schreibt profiledb.conf atomar; verhindert Race-Conditions", "high", "profile"], ["P3-08", "Maximale Programmanzahl pro Profil erzwingen (20)", "Validierung beim Laden: Wenn $AppLoader.Count -gt 20, Fehler + Abbruch", "high", "profile"], ["P3-09", "Profil-Validierungsfunktion implementieren", "Invoke-PSARProfileValidation: Prüft ProgramName-Einzigartigkeit, ExePath-Existenz, RunAs-Wert, WindowStyle-Wert, WaitMillisecs-Schritte (100er), exe-Only", "critical", "profile"], ["P3-10", "SHA256-Integritätsprüfung für Profildateien (optional/erweiterbar)", "Beim Laden Hash der .ps1 gegen gespeicherten Hash in profiledb.conf vergleichen; bei Abweichung warnen", "low", "profile"]], "Phase 4: Launcher-Engine": [["P4-01", "Funktion Invoke-PSARLaunch implementieren (Hauptfunktion)", "Orchestriert den gesamten Startvorgang: Profil laden → validieren → je Eintrag Prozess starten → Warten → nächster Eintrag", "critical", "launcher"], ["P4-02", "Prozessstart 'AsUser' implementieren", "Start-Process mit aktuellem Benutzerkontext, WindowStyle-Mapping, WaitMillisecs-Verzögerung via Start-Sleep", "critical", "launcher"], ["P4-03", "Prozessstart 'AsAdmin' implementieren", "Start-Process -Verb RunAs; Hinweis: UAC-Prompt erscheint; UseShellExecute=true erforderlich", "critical", "launcher"], ["P4-04", "Prozessstart als spezifischer Benutzer implementieren", "Start-Process -Credential (Get-Credential); Einschränkung dokumentieren: UseShellExecute=false + Credential = Konflikt auf Windows", "high", "launcher"], ["P4-05", "WindowStyle-Mapping implementieren", "Normal→Normal, Hidden→Hidden, Minimized→Minimized, Maximized→Maximized; Enum-Mapping zu [System.Diagnostics.ProcessWindowStyle]", "high", "launcher"], ["P4-06", "WaitMillisecs-Logik implementieren", "Start-Sleep -Milliseconds $entry.WaitMillisecs; 0 = kein Warten; 100er-Schritte validiert", "medium", "launcher"], ["P4-07", "Fehlerbehandlung pro Programm-Eintrag implementieren", "Try/Catch je Eintrag; bei Fehler: loggen, weitermachen (nicht abbrechen), am Ende Fehlerzusammenfassung", "critical", "launcher"], ["P4-08", "Fortschritts-Event-System implementieren (für GUI/Console/Taskbar)", "Write-Progress + Custom-Event-System: $PSAR_ProgressEvent; UI-Module subscriben; entkoppelt von Launcher-Logik", "high", "launcher"], ["P4-09", "Exe-Only-Validierung implementieren", "Vor jedem Start: [System.IO.Path]::GetExtension($entry.ExePath) -eq '.exe' — sonst überspringen + warnen", "critical", "launcher"]], "Phase 5: Logging-System": [["P5-01", "Funktion Write-PSARLog implementieren", "Schreibt in aktuelle Logdatei: Timestamp, Severity (INFO/WARN/ERROR), Message; Thread-safe via Mutex", "critical", "logging"], ["P5-02", "Logdatei-Namensschema implementieren", "YYYYMMDD-HHMMSS.log via Get-Date -Format 'yyyyMMdd-HHmmss'; eine neue Datei pro Programmausführung", "high", "logging"], ["P5-03", "Log-Rotation implementieren (max. 50 Dateien)", "Vor Start: Alle .log-Dateien zählen, wenn >50 → älteste (Sort-Object LastWriteTime) löschen bis <=49", "high", "logging"], ["P5-04", "NoLogs-Switch in Logging-System integrieren", "Wenn $NoLogs=$true → Write-PSARLog ist ein No-Op (schreibt nichts); Logdatei wird nicht erstellt", "medium", "logging"], ["P5-05", "Log-Level-System implementieren", "VERBOSE, INFO, WARN, ERROR, FATAL; konfigurierbar über settings\\psapp.settings.conf", "medium", "logging"], ["P5-06", "Session-Start und Session-End im Log erfassen", "Beim Start: Version, Modus, ProfilID, Timestamp; beim Ende: Erfolg/Fehler-Zusammenfassung, Dauer", "high", "logging"]], "Phase 6: GUI-Modi": [["P6-01", "Mode 'Hidden' implementieren", "Kein Fenster, keine Ausgabe; nur Logging; einfachste Implementierung, zuerst umsetzen", "critical", "gui"], ["P6-02", "Mode 'Console' implementieren (Custom-Console-GUI)", "WPF-Fenster das eine Konsole simuliert: Scrollbare TextBox, Monospace-Font, dunkel; Updates via Dispatcher", "high", "gui"], ["P6-03", "Mode 'GUI' implementieren (Fortschrittsfenster)", "WPF-Fenster mit ProgressBar, aktuellem Programmnamen, Status-Label; Runspace für nicht-blockierende UI", "high", "gui"], ["P6-04", "Mode 'Taskbar' implementieren (System Tray Icon)", "NotifyIcon via System.Windows.Forms; Icon anzeigen solange aktiv; Tooltip mit Fortschritt", "medium", "gui"], ["P6-05", "WPF-Runspace-Muster implementieren", "UI läuft in eigenem Runspace; PowerShell-Instanz mit SynchronizedHashtable für Thread-sichere Kommunikation", "critical", "gui"], ["P6-06", "GUI-Fortschrittsanzeige an Launcher-Events binden", "Fortschritts-Events aus Phase 4 in WPF-Dispatcher.Invoke() weiterleiten; UI-Update ohne Freeze", "high", "gui"], ["P6-07", "Sauberes Beenden aller GUI-Ressourcen sicherstellen", "Dispose() auf NotifyIcon, WPF-Window schließen, Runspace beenden — auch bei Fehler (try/finally)", "high", "gui"]], "Phase 7: Settings & Konfiguration": [["P7-01", "Settings-Datei psapp.settings.conf definieren", "Format: Key=Value, eine Einstellung pro Zeile; Kommentare mit #; Beispiel: LogLevel=INFO, MaxLogs=50", "medium", "settings"], ["P7-02", "Funktion Get-PSARSettings implementieren", "Liest settings-Datei, gibt Hashtable zurück; Default-Werte wenn Datei fehlt", "medium", "settings"], ["P7-03", "Funktion Set-PSARSetting implementieren", "Schreibt/aktualisiert einen Wert in der settings-Datei; atomares Schreiben", "low", "settings"], ["P7-04", "Settings beim Start laden und global verfügbar machen", "$script:PSAR_Settings = Get-PSARSettings; alle Module greifen auf diese Variable zu", "medium", "settings"]], "Phase 8: Fehlerbehandlung & Robustheit": [["P8-01", "Globalen Error-Handler implementieren", "trap { } oder $ErrorActionPreference='Stop' + Try/Catch in Main; unbehandelte Fehler ins Log schreiben", "critical", "robustness"], ["P8-02", "Graceful-Exit bei kritischen Fehlern implementieren", "Exit-Codes definieren: 0=OK, 1=Parameterfehler, 2=Profil nicht gefunden, 3=Launcher-Fehler, 99=Unbekannt", "high", "robustness"], ["P8-03", "Eingabe-Sanitization implementieren", "Alle String-Parameter: Trim, Länge prüfen, gefährliche Zeichen (Semikolon, Backtick in ProfileID) ablehnen", "critical", "robustness"], ["P8-04", "Profil-Datei darf nur ExePfade starten (Path Traversal verhindern)", "ExePath muss absoluter Pfad sein, keine .., keine UNC-Shares (optional konfigurierbar), Extension muss .exe sein", "critical", "robustness"], ["P8-05", "psapp.profiledb.conf vor Injection schützen", "Beim Schreiben: Semikolon im ProfileName verbieten; beim Lesen: Zeilen strikt parsen (Split(';')[0] und [1] only)", "high", "robustness"], ["P8-06", "Parallelstart verhindern (Single-Instance-Guard)", "Mutex mit globalem Namen; wenn bereits eine Instanz läuft: Fehler + Exit", "medium", "robustness"], ["P8-07", "Require-Elevation-Check implementieren", "Wenn AsAdmin-Einträge vorhanden: prüfen ob UAC verfügbar; warnen wenn UAC deaktiviert", "medium", "robustness"]], "Phase 9: Testing & Qualitätssicherung": [["P9-01", "Pester-Test-Suite anlegen", "Verzeichnis .\\tests\\; Pester v5; separate Test-Dateien pro Core-Modul", "high", "testing"], ["P9-02", "Unit-Tests für Validierungsfunktionen", "Tests für: ProfileID-Regex, WaitMillisecs-100er-Schritte, WindowStyle-Enum, ExePath-Extension, Max-20-Limit", "high", "testing"], ["P9-03", "Unit-Tests für Profil-CRUD-Operationen", "Tests für: New-PSARProfile (Duplikat, Erfolg), Remove-PSARProfile, Get-PSARProfile (ungültige Datei)", "high", "testing"], ["P9-04", "Unit-Tests für Log-Rotation", "Test: 50 Dummy-Logs erstellen, neues Log triggern, prüfen ob ältestes gelöscht wurde", "medium", "testing"], ["P9-05", "Integration-Test: Hidden-Mode End-to-End", "Testprofil mit Notepad.exe erstellen, Hidden-Mode ausführen, Log prüfen, Notepad beenden", "high", "testing"], ["P9-06", "Sicherheits-Tests (negative Tests)", "Test: Path-Traversal-Versuch, nicht-.exe-Datei im Profil, mehr als 20 Einträge, ungültige ProfileID", "critical", "testing"], ["P9-07", "PSScriptAnalyzer auf alle Dateien ausführen", "Alle Core-Module und Hauptskript durch PSScriptAnalyzer; 0 Errors, 0 Warnings anstreben", "high", "testing"]], "Phase 10: Dokumentation & Releases": [["P10-01", "README.md erstellen", "Beschreibung, Voraussetzungen, Installation, Schnellstart, Parameter-Referenz, Beispiele", "high", "docs"], ["P10-02", "CHANGELOG.md anlegen", "Keep-a-Changelog-Format; v0.1.0 initial entry", "medium", "docs"], ["P10-03", "Inline-Kommentare und Comment-Based Help hinzufügen", "Jede öffentliche Funktion: .SYNOPSIS, .DESCRIPTION, .PARAMETER, .EXAMPLE, .OUTPUTS", "high", "docs"], ["P10-04", "Beispiel-Profile erstellen", "3 Demo-Profile in profiles\\examples\\: standard-apps.config.ps1, dev-tools.config.ps1, admin-tools.config.ps1", "medium", "docs"], ["P10-05", "VPDLX-Modul-Integration dokumentieren", "Abschnitt im README: Wie PSAppRocket mit VPDLX zusammen genutzt werden kann", "low", "docs"], ["P10-06", "GitHub Repository aufsetzen", ".gitignore (Logfiles, Settings mit Secrets), LICENSE (MIT), Issues/Labels anlegen", "medium", "docs"], ["P10-07", "v0.1.0 Release taggen", "Erste funktionsfähige Version (Hidden + Console Mode, Profil-CRUD, Logging) als GitHub Release", "low", "docs"]]};
+const TODOS = {
+  "Phase 1: Project Structure & Scaffold": [
+    ["P1-01","Create directory structure","Create all folders: PSAppRocket (root), logfiles, profiles, settings","critical","structure"],
+    ["P1-02","Create main script psapp.rocket.ps1","Empty file with comment header in personal coding style (version, author, date, description)","critical","structure"],
+    ["P1-03","Create psapp.profiledb.conf","Empty config file in root directory; format: ProfileName;Filename.config.ps1","critical","structure"],
+    ["P1-04","Create core module files in .core\\ subdirectory","Files: psapp.logging.ps1, psapp.profile.ps1, psapp.launcher.ps1, psapp.ui.ps1, psapp.validation.ps1","critical","structure"],
+    ["P1-05","Implement dot-sourcing of all core modules in psapp.rocket.ps1","Include all .core\\ files via . $PSScriptRoot\\..., catch load errors","critical","structure"],
+    ["P1-06","Define global constants and variables","$PSAR_VERSION, $PSAR_ROOT, $PSAR_PROFILES_DIR, $PSAR_LOGFILES_DIR, $PSAR_SETTINGS_DIR, $PSAR_PROFILEDB, $PSAR_MAX_PROFILES, $PSAR_MAX_LOGS","high","structure"],
+    ["P1-07","Define and implement PSARreturn object type","Unified return object (based on PSAppCoreLib): .Success [bool], .Message [string], .Data [object], .ErrorCode [int]","critical","structure"]
+  ],
+  "Phase 2: Parameter Handling & Validation": [
+    ["P2-01","Define CmdletBinding + ParameterSets","Parameter Sets: 'Run', 'AddProfile', 'DelProfile', 'Backup', 'Restore' - each set excludes the others","critical","params"],
+    ["P2-02","Implement -ProfileID [string] (Mandatory, Set: Run)","Validation: string not empty, no special chars except - and _, max 50 chars","critical","params"],
+    ["P2-03","Implement -Mode [string] (Mandatory, Set: Run)","ValidateSet: 'GUI', 'Console', 'Taskbar', 'Hidden' - case-insensitive","critical","params"],
+    ["P2-04","Implement -NoLogs [switch] (Optional, Set: Run)","Defaults to false; if set, no logfile is created","medium","params"],
+    ["P2-05","Implement -AddProfile [switch] (Set: AddProfile)","Only valid together with -NewProfileID; check via ParameterSet-Binding","high","params"],
+    ["P2-06","Implement -NewProfileID [string] (Set: AddProfile)","Validation regex: ^[a-zA-Z0-9_-]{1,50}$ - no spaces, no special chars except - and _","high","params"],
+    ["P2-07","Implement -DelProfile [string] (Optional, Set: DelProfile)","Check if profile exists in profiledb.conf AND as .ps1 file; no confirm dialog (by design)","high","params"],
+    ["P2-08","Define future parameters as placeholders","-Backup, -BackupDir, -Restore, -RestoreFile as parameter placeholders with Write-Warning 'Not yet implemented'","low","params"],
+    ["P2-09","Centralize parameter validation","Function Invoke-PSARParameterValidation in psapp.validation.ps1 - all checks in one place","high","params"]
+  ],
+  "Phase 3: Profile Management": [
+    ["P3-01","Implement function New-PSARProfile","Creates new profile: validate NewProfileID, check duplicate in profiledb.conf (case-insensitive), create template file, update profiledb.conf","critical","profile"],
+    ["P3-02","Define and implement profile template file","Template contains: PSCustomObject array $AppLoader, 3 commented example entries with all fields, detailed inline comments in English","critical","profile"],
+    ["P3-03","Migrate profile file format from string array to PSCustomObject array","Format: [PSCustomObject]@{ProgramName=''; ExePath=''; RunAs='AsUser'; WindowStyle='Normal'; WaitMillisecs=0}","critical","profile"],
+    ["P3-04","Implement function Remove-PSARProfile","Checks existence in profiledb.conf + file, deletes both without prompt, returns PSARreturn","high","profile"],
+    ["P3-05","Implement function Get-PSARProfile","Loads a profile file, validates the structure, returns array of PSCustomObjects","critical","profile"],
+    ["P3-06","Implement function Get-PSARAllProfiles","Reads psapp.profiledb.conf, returns list of all available profiles","medium","profile"],
+    ["P3-07","Implement function Update-PSARProfileDB","Reads, updates and writes profiledb.conf atomically; prevents race conditions","high","profile"],
+    ["P3-08","Enforce maximum program count per profile (20)","Validation on load: if $AppLoader.Count -gt 20, error + abort","high","profile"],
+    ["P3-09","Implement profile validation function","Invoke-PSARProfileValidation: checks ProgramName uniqueness, ExePath existence, RunAs value, WindowStyle value, WaitMillisecs steps (100s), exe-only","critical","profile"],
+    ["P3-10","SHA256 integrity check for profile files (optional/extensible)","On load: compare hash of .ps1 against stored hash in profiledb.conf; warn on mismatch","low","profile"]
+  ],
+  "Phase 4: Launcher Engine": [
+    ["P4-01","Implement function Invoke-PSARLaunch (main function)","Orchestrates the entire launch process: load profile -> validate -> start process per entry -> wait -> next entry","critical","launcher"],
+    ["P4-02","Implement process start 'AsUser'","Start-Process with current user context, WindowStyle mapping, WaitMillisecs delay via Start-Sleep","critical","launcher"],
+    ["P4-03","Implement process start 'AsAdmin'","Start-Process -Verb RunAs; note: UAC prompt appears; UseShellExecute=true required","critical","launcher"],
+    ["P4-04","Implement process start as specific user","Start-Process -Credential (Get-Credential); document limitation: UseShellExecute=false + Credential = conflict on Windows","high","launcher"],
+    ["P4-05","Implement WindowStyle mapping","Normal->Normal, Hidden->Hidden, Minimized->Minimized, Maximized->Maximized; enum mapping to [System.Diagnostics.ProcessWindowStyle]","high","launcher"],
+    ["P4-06","Implement WaitMillisecs logic","Start-Sleep -Milliseconds $entry.WaitMillisecs; 0 = no wait; 100-step increments validated","medium","launcher"],
+    ["P4-07","Implement error handling per program entry","Try/Catch per entry; on error: log, continue (do not abort), error summary at end","critical","launcher"],
+    ["P4-08","Implement progress event system (for GUI/Console/Taskbar)","Write-Progress + custom event system: $PSAR_ProgressEvent; UI modules subscribe; decoupled from launcher logic","high","launcher"],
+    ["P4-09","Implement exe-only validation","Before each start: [System.IO.Path]::GetExtension($entry.ExePath) -eq '.exe' - otherwise skip + warn","critical","launcher"]
+  ],
+  "Phase 5: Logging System": [
+    ["P5-01","Implement function Write-PSARLog","Writes to current log file: timestamp, severity (INFO/WARN/ERROR), message; thread-safe via mutex","critical","logging"],
+    ["P5-02","Implement log file naming scheme","YYYYMMDD-HHMMSS.log via Get-Date -Format 'yyyyMMdd-HHmmss'; one new file per program run","high","logging"],
+    ["P5-03","Implement log rotation (max 50 files)","Before start: count all .log files, if >50 -> delete oldest (Sort-Object LastWriteTime) until <=49","high","logging"],
+    ["P5-04","Integrate NoLogs switch into logging system","If $NoLogs=$true -> Write-PSARLog is a no-op (writes nothing); log file is not created","medium","logging"],
+    ["P5-05","Implement log level system","VERBOSE, INFO, WARN, ERROR, FATAL; configurable via settings\\psapp.settings.conf","medium","logging"],
+    ["P5-06","Capture session start and session end in log","On start: version, mode, profileID, timestamp; on end: success/error summary, duration","high","logging"]
+  ],
+  "Phase 6: GUI Modes": [
+    ["P6-01","Implement mode 'Hidden'","No window, no output; logging only; simplest implementation, do first","critical","gui"],
+    ["P6-02","Implement mode 'Console' (custom console GUI)","WPF window simulating a console: scrollable TextBox, monospace font, dark theme; updates via Dispatcher","high","gui"],
+    ["P6-03","Implement mode 'GUI' (progress window)","WPF window with ProgressBar, current program name, status label; runspace for non-blocking UI","high","gui"],
+    ["P6-04","Implement mode 'Taskbar' (system tray icon)","NotifyIcon via System.Windows.Forms; show icon while active; tooltip with progress","medium","gui"],
+    ["P6-05","Implement WPF runspace pattern","UI runs in its own runspace; PowerShell instance with SynchronizedHashtable for thread-safe communication","critical","gui"],
+    ["P6-06","Bind GUI progress display to launcher events","Forward progress events from Phase 4 into WPF-Dispatcher.Invoke(); UI update without freeze","high","gui"],
+    ["P6-07","Ensure clean shutdown of all GUI resources","Dispose() on NotifyIcon, close WPF window, terminate runspace - even on error (try/finally)","high","gui"]
+  ],
+  "Phase 7: Settings & Configuration": [
+    ["P7-01","Define settings file psapp.settings.conf","Format: Key=Value, one setting per line; comments with #; example: LogLevel=INFO, MaxLogs=50","medium","settings"],
+    ["P7-02","Implement function Get-PSARSettings","Reads settings file, returns hashtable; default values if file missing","medium","settings"],
+    ["P7-03","Implement function Set-PSARSetting","Writes/updates a value in the settings file; atomic write","low","settings"],
+    ["P7-04","Load settings on startup and make globally available","$script:PSAR_Settings = Get-PSARSettings; all modules access this variable","medium","settings"]
+  ],
+  "Phase 8: Error Handling & Robustness": [
+    ["P8-01","Implement global error handler","trap { } or $ErrorActionPreference='Stop' + Try/Catch in Main; write unhandled errors to log","critical","robustness"],
+    ["P8-02","Implement graceful exit on critical errors","Define exit codes: 0=OK, 1=parameter error, 2=profile not found, 3=launcher error, 99=unknown","high","robustness"],
+    ["P8-03","Implement input sanitization","All string parameters: Trim, check length, reject dangerous chars (semicolons, backtick in ProfileID)","critical","robustness"],
+    ["P8-04","Profile file may only start exe paths (prevent path traversal)","ExePath must be absolute path, no .., no UNC shares (optionally configurable), extension must be .exe","critical","robustness"],
+    ["P8-05","Protect psapp.profiledb.conf against injection","On write: forbid semicolons in ProfileName; on read: strictly parse lines (Split(';')[0] and [1] only)","high","robustness"],
+    ["P8-06","Prevent parallel starts (single-instance guard)","Mutex with global name; if an instance is already running: error + exit","medium","robustness"],
+    ["P8-07","Implement require-elevation check","If AsAdmin entries present: check if UAC is available; warn if UAC is disabled","medium","robustness"]
+  ],
+  "Phase 9: Testing & Quality Assurance": [
+    ["P9-01","Create Pester test suite","Directory .\\tests\\; Pester v5; separate test files per core module","high","testing"],
+    ["P9-02","Unit tests for validation functions","Tests for: ProfileID regex, WaitMillisecs 100-step increments, WindowStyle enum, ExePath extension, max-20 limit","high","testing"],
+    ["P9-03","Unit tests for profile CRUD operations","Tests for: New-PSARProfile (duplicate, success), Remove-PSARProfile, Get-PSARProfile (invalid file)","high","testing"],
+    ["P9-04","Unit tests for log rotation","Test: create 50 dummy logs, trigger new log, check if oldest was deleted","medium","testing"],
+    ["P9-05","Integration test: Hidden mode end-to-end","Create test profile with Notepad.exe, run Hidden mode, check log, kill Notepad","high","testing"],
+    ["P9-06","Security tests (negative tests)","Test: path traversal attempt, non-.exe file in profile, more than 20 entries, invalid ProfileID","critical","testing"],
+    ["P9-07","Run PSScriptAnalyzer on all files","All core modules and main script through PSScriptAnalyzer; aim for 0 errors, 0 warnings","high","testing"]
+  ],
+  "Phase 10: Documentation & Releases": [
+    ["P10-01","Create README.md","Description, prerequisites, installation, quick start, parameter reference, examples","high","docs"],
+    ["P10-02","Create CHANGELOG.md","Keep-a-Changelog format; v0.1.0 initial entry","medium","docs"],
+    ["P10-03","Add inline comments and comment-based help","Every public function: .SYNOPSIS, .DESCRIPTION, .PARAMETER, .EXAMPLE, .OUTPUTS","high","docs"],
+    ["P10-04","Create example profiles","3 demo profiles in profiles\\examples\\: standard-apps.config.ps1, dev-tools.config.ps1, admin-tools.config.ps1","medium","docs"],
+    ["P10-05","Document VPDLX module integration","Section in README: how PSAppRocket can be used together with VPDLX","low","docs"],
+    ["P10-06","Set up GitHub repository",".gitignore (logfiles, settings with secrets), LICENSE (MIT), create issues/labels","medium","docs"],
+    ["P10-07","Tag v0.1.0 release","First functional version (Hidden + Console mode, profile CRUD, logging) as GitHub release","low","docs"]
+  ]
+};
 
 const PRIO_ORDER = {critical:0,high:1,medium:2,low:3};
-const PRIO_LABELS = {critical:'Kritisch',high:'Hoch',medium:'Mittel',low:'Niedrig'};
+const PRIO_LABELS = {critical:'Critical',high:'High',medium:'Medium',low:'Low'};
 const PRIO_COLORS = {critical:'var(--error)',high:'var(--warn)',medium:'var(--orange)',low:'var(--success)'};
-const CAT_LABELS = {structure:'Struktur',params:'Parameter',profile:'Profil-Mgmt',launcher:'Launcher',logging:'Logging',gui:'GUI-Modi',settings:'Settings',robustness:'Robustheit',testing:'Testing',docs:'Dokumentation'};
+const CAT_LABELS = {structure:'Structure',params:'Parameters',profile:'Profile Mgmt',launcher:'Launcher',logging:'Logging',gui:'GUI Modes',settings:'Settings',robustness:'Robustness',testing:'Testing',docs:'Documentation'};
 
 let state = {};
 let activeFilters = {prio: null, cat: null, status: null};
@@ -672,10 +767,10 @@ function buildStatusBar() {
   document.getElementById('statusBarDone').textContent = done+' / '+total;
 
   document.getElementById('statusBarLeft').innerHTML = `
-    <span class="status-pill"><span class="sdot" style="background:var(--error)"></span>${byPrio.critical} Kritisch</span>
-    <span class="status-pill"><span class="sdot" style="background:var(--warn)"></span>${byPrio.high} Hoch</span>
-    <span class="status-pill"><span class="sdot" style="background:var(--orange)"></span>${byPrio.medium} Mittel</span>
-    <span class="status-pill"><span class="sdot" style="background:var(--success)"></span>${byPrio.low} Niedrig</span>
+    <span class="status-pill"><span class="sdot" style="background:var(--error)"></span>${byPrio.critical} Critical</span>
+    <span class="status-pill"><span class="sdot" style="background:var(--warn)"></span>${byPrio.high} High</span>
+    <span class="status-pill"><span class="sdot" style="background:var(--orange)"></span>${byPrio.medium} Medium</span>
+    <span class="status-pill"><span class="sdot" style="background:var(--success)"></span>${byPrio.low} Low</span>
   `;
 }
 
@@ -687,17 +782,17 @@ function buildFilters() {
   const prioFilters = Object.keys(PRIO_ORDER).map(p=>`<button class="filter-btn prio-filter ${activeFilters.prio===p?'active':''}" data-prio="${p}">${PRIO_LABELS[p]}</button>`).join('');
   const catFilters = Object.keys(CAT_LABELS).map(c=>`<button class="filter-btn cat-filter ${activeFilters.cat===c?'active':''}" data-cat="${c}">${CAT_LABELS[c]}</button>`).join('');
   const statusFilters = `
-    <button class="filter-btn status-filter ${activeFilters.status==='open'?'active':''}" data-status="open">Offen</button>
-    <button class="filter-btn status-filter ${activeFilters.status==='done'?'active':''}" data-status="done">Erledigt</button>
+    <button class="filter-btn status-filter ${activeFilters.status==='open'?'active':''}" data-status="open">Open</button>
+    <button class="filter-btn status-filter ${activeFilters.status==='done'?'active':''}" data-status="done">Completed</button>
   `;
   bar.innerHTML = `
-    <span class="filter-label">Priorität</span>${prioFilters}
+    <span class="filter-label">Priority</span>${prioFilters}
     <div class="filter-sep"></div>
-    <span class="filter-label">Kategorie</span>${catFilters}
+    <span class="filter-label">Category</span>${catFilters}
     <div class="filter-sep"></div>
     <span class="filter-label">Status</span>${statusFilters}
     <div class="filter-sep"></div>
-    <button class="filter-btn" id="clearFilters">✕ Zurücksetzen</button>
+    <button class="filter-btn" id="clearFilters">✕ Reset</button>
   `;
   bar.querySelectorAll('.prio-filter').forEach(btn=>{
     btn.addEventListener('click',()=>{ activeFilters.prio = activeFilters.prio===btn.dataset.prio?null:btn.dataset.prio; rebuild(); });
@@ -746,11 +841,12 @@ function buildPhases(searchVal='') {
     card.dataset.phase = phaseKey;
 
     const phaseNum = phase.match(/Phase (\d+)/)?.[1]||'?';
+    const phaseTitle = phase.replace(/Phase \d+: /,'');
     card.innerHTML = `
       <div class="phase-header">
         <svg class="phase-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
         <span class="phase-badge">Phase ${phaseNum}</span>
-        <span class="phase-title">${phase.replace(/Phase \d+: /,'')}</span>
+        <span class="phase-title">${phaseTitle}</span>
         <div class="phase-meta">
           <span class="phase-progress">${done}/${total}</span>
           <div class="phase-mini-bar"><div class="phase-mini-fill" style="width:${pct}%"></div></div>
@@ -761,16 +857,16 @@ function buildPhases(searchVal='') {
           <thead><tr>
             <th></th>
             <th>ID</th>
-            <th>Aufgabe</th>
-            <th>Priorität</th>
-            <th>Kategorie</th>
+            <th>Task</th>
+            <th>Priority</th>
+            <th>Category</th>
           </tr></thead>
           <tbody id="tbody_${phaseKey}"></tbody>
         </table>
         <div class="empty-state" id="empty_${phaseKey}" style="display:none">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <h3>Keine Treffer</h3>
-          <p>Kein Eintrag in dieser Phase entspricht dem Filter.</p>
+          <h3>No matches</h3>
+          <p>No entry in this phase matches the current filter.</p>
         </div>
       </div>
     `;
@@ -812,8 +908,8 @@ function buildPhases(searchVal='') {
   if(!anyVisible){
     grid.innerHTML=`<div class="empty-state" style="padding:4rem 1rem">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:48px;height:48px;margin:0 auto 1rem"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <h3>Keine Aufgaben gefunden</h3>
-      <p>Passe die Filter oder die Suche an.</p>
+      <h3>No tasks found</h3>
+      <p>Adjust the filters or search query.</p>
     </div>`;
   }
 
@@ -850,10 +946,9 @@ function buildDashboard() {
   container.innerHTML = `
     <div>
       <div class="dash-heading">Dashboard</div>
-      <div class="dash-subheading">Gesamtübersicht · PSAppRocket ToDo</div>
+      <div class="dash-subheading">Overview &middot; PSAppRocket Tasks</div>
     </div>
 
-    <!-- Progress card -->
     <div class="dash-progress-card">
       <div class="dash-pct-ring">
         <svg viewBox="0 0 80 80">
@@ -865,70 +960,68 @@ function buildDashboard() {
         <div class="dash-pct-label">${pct}%</div>
       </div>
       <div class="dash-progress-info">
-        <div class="dash-progress-title">Gesamtfortschritt</div>
-        <div class="dash-progress-sub">${done} von ${total} Aufgaben erledigt · ${open} noch offen</div>
+        <div class="dash-progress-title">Overall Progress</div>
+        <div class="dash-progress-sub">${done} of ${total} tasks completed &middot; ${open} remaining</div>
         <div class="dash-progress-bar-wrap"><div class="dash-progress-bar-fill" style="width:${pct}%"></div></div>
       </div>
     </div>
 
-    <!-- Priority cards -->
     <div>
-      <div class="dash-section-title">Priorität</div>
+      <div class="dash-section-title">Priority</div>
       <div class="dash-cards-grid">
         <div class="dash-card">
           <div class="dash-card-icon" style="background:var(--error-hl)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--error)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
           <div class="dash-card-value" style="color:var(--error)">${byPrio.critical}</div>
-          <div class="dash-card-label">Kritisch</div>
-          <div class="dash-card-sub">${byPrioDone.critical} erledigt</div>
+          <div class="dash-card-label">Critical</div>
+          <div class="dash-card-sub">${byPrioDone.critical} completed</div>
         </div>
         <div class="dash-card">
           <div class="dash-card-icon" style="background:var(--warn-hl)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--warn)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           </div>
           <div class="dash-card-value" style="color:var(--warn)">${byPrio.high}</div>
-          <div class="dash-card-label">Hoch</div>
-          <div class="dash-card-sub">${byPrioDone.high} erledigt</div>
+          <div class="dash-card-label">High</div>
+          <div class="dash-card-sub">${byPrioDone.high} completed</div>
         </div>
         <div class="dash-card">
           <div class="dash-card-icon" style="background:var(--orange-hl)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           </div>
           <div class="dash-card-value" style="color:var(--orange)">${byPrio.medium}</div>
-          <div class="dash-card-label">Mittel</div>
-          <div class="dash-card-sub">${byPrioDone.medium} erledigt</div>
+          <div class="dash-card-label">Medium</div>
+          <div class="dash-card-sub">${byPrioDone.medium} completed</div>
         </div>
         <div class="dash-card">
           <div class="dash-card-icon" style="background:var(--success-hl)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <div class="dash-card-value" style="color:var(--success)">${byPrio.low}</div>
-          <div class="dash-card-label">Niedrig</div>
-          <div class="dash-card-sub">${byPrioDone.low} erledigt</div>
+          <div class="dash-card-label">Low</div>
+          <div class="dash-card-sub">${byPrioDone.low} completed</div>
         </div>
         <div class="dash-card">
           <div class="dash-card-icon" style="background:var(--primary-hl)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="9 11 12 14 22 4"/></svg>
           </div>
           <div class="dash-card-value" style="color:var(--primary)">${done}</div>
-          <div class="dash-card-label">Erledigt</div>
-          <div class="dash-card-sub">von ${total} gesamt</div>
+          <div class="dash-card-label">Completed</div>
+          <div class="dash-card-sub">of ${total} total</div>
         </div>
         <div class="dash-card">
           <div class="dash-card-icon" style="background:var(--surface-dyn)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           </div>
           <div class="dash-card-value">${open}</div>
-          <div class="dash-card-label">Offen</div>
-          <div class="dash-card-sub">${total > 0 ? (100-pct) : 0}% ausstehend</div>
+          <div class="dash-card-label">Open</div>
+          <div class="dash-card-sub">${total > 0 ? (100-pct) : 0}% pending</div>
         </div>
       </div>
     </div>
 
-    <!-- Category breakdown -->
     <div>
-      <div class="dash-section-title">Kategorie</div>
+      <div class="dash-section-title">Category Breakdown</div>
       <div class="dash-cat-grid">
         ${Object.entries(CAT_LABELS).map(([key,label])=>{
           const count = byCat[key]||0;
@@ -949,7 +1042,7 @@ function buildDashboard() {
 // ============================================================
 // VIEWS
 // ============================================================
-function switchView(viewId, filterPrio, filterStatus) {
+function switchView(viewId) {
   currentView = viewId;
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   const el = document.getElementById('view-'+viewId);
@@ -959,12 +1052,7 @@ function switchView(viewId, filterPrio, filterStatus) {
   const navEl = document.getElementById('nav-'+viewId);
   if(navEl) navEl.classList.add('active');
 
-  if(filterPrio) { activeFilters.prio = filterPrio; activeFilters.status = null; activeFilters.cat = null; }
-  if(filterStatus) { activeFilters.status = filterStatus; activeFilters.prio = null; activeFilters.cat = null; }
-
   if(viewId === 'dashboard') buildDashboard();
-
-  // Close sidebar on mobile after nav
   if(window.innerWidth <= 768) closeSidebar();
 }
 
@@ -989,31 +1077,11 @@ document.getElementById('btnSidebarToggle').addEventListener('click', toggleSide
 document.getElementById('sidebarOverlay').addEventListener('click', closeSidebar);
 
 // Nav items
-document.querySelectorAll('.nav-item[data-view]').forEach(item=>{
-  item.addEventListener('click',()=>{
-    const fp = item.dataset.filterPrio || null;
-    const fs = item.dataset.filterStatus || null;
-    switchView(item.dataset.view, fp, fs);
-    rebuild();
-  });
-});
-
-// Also handle specific filter nav items
-document.getElementById('nav-critical').addEventListener('click',()=>{
-  activeFilters = {prio:'critical',cat:null,status:null};
-  switchView('tasks');
-  rebuild();
-});
-document.getElementById('nav-open').addEventListener('click',()=>{
-  activeFilters = {prio:null,cat:null,status:'open'};
-  switchView('tasks');
-  rebuild();
-});
-document.getElementById('nav-done').addEventListener('click',()=>{
-  activeFilters = {prio:null,cat:null,status:'done'};
-  switchView('tasks');
-  rebuild();
-});
+document.getElementById('nav-tasks').addEventListener('click',()=>{ activeFilters={prio:null,cat:null,status:null}; switchView('tasks'); rebuild(); });
+document.getElementById('nav-dashboard').addEventListener('click',()=>{ switchView('dashboard'); });
+document.getElementById('nav-critical').addEventListener('click',()=>{ activeFilters={prio:'critical',cat:null,status:null}; switchView('tasks'); rebuild(); });
+document.getElementById('nav-open').addEventListener('click',()=>{ activeFilters={prio:null,cat:null,status:'open'}; switchView('tasks'); rebuild(); });
+document.getElementById('nav-done').addEventListener('click',()=>{ activeFilters={prio:null,cat:null,status:'done'}; switchView('tasks'); rebuild(); });
 
 // ============================================================
 // TOGGLE TASK
@@ -1050,10 +1118,10 @@ document.getElementById('searchInput').addEventListener('input', e=>{
 // EXPORT CSV
 // ============================================================
 document.getElementById('exportBtn').addEventListener('click',()=>{
-  let csv = 'ID;Phase;Aufgabe;Beschreibung;Priorität;Kategorie;Status\n';
+  let csv = 'ID;Phase;Task;Description;Priority;Category;Status\n';
   Object.entries(TODOS).forEach(([phase,tasks])=>{
     tasks.forEach(t=>{
-      const status = state[t[0]]?'Erledigt':'Offen';
+      const status = state[t[0]]?'Completed':'Open';
       csv += [t[0], phase.replace(/Phase \d+: /,''), t[1], t[2], PRIO_LABELS[t[3]], CAT_LABELS[t[4]], status].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')+'\n';
     });
   });
