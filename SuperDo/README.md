@@ -71,6 +71,10 @@ Just open the file in any modern browser – no installation or build step requi
 - Changed accent color from teal (`#01696f`) to blue (`#0066cc`)
 - Switched entire UI to English
 - Translated all task titles and descriptions to English
+- **Tasks view vertical scroll fix:** `.main-content` now scrolls correctly without horizontal overflow
+- **Dashboard category layout optimization:** increased gap between category columns to `0.875rem` for better visual separation
+- **Category row spacing improvement:** padding increased to `0.5rem` for better touch targets and readability
+- **Category bar height optimization:** increased from `2rem` to `3rem` for improved visibility and interaction
 
 ### v1.00.01 (2026-04-12)
 - Initial release based on PSAppRocket-ToDo-Demo
