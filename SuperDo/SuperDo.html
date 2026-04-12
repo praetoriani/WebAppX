@@ -10,46 +10,116 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ============================================================
+   LIGHT MODE  –  soft pastel-grey palette
+   ============================================================ */
 :root,[data-theme="light"]{
-  --bg:#f4f6fb;--surface:#f8f9fd;--surface-2:#fbfcfe;--surface-off:#eaecf4;--surface-dyn:#dde1ef;
-  --border:rgba(30,40,80,0.11);--divider:rgba(30,40,80,0.07);
-  --text:#1a2240;--text-muted:#5a6380;--text-faint:#a8afc8;--text-inv:#f0f2fa;
-  --primary:#0059b3;--primary-h:#003d80;--primary-hl:#ccddf5;
-  --error:#a12c7b;--error-hl:#e8d0dd;
-  --warn:#964219;--warn-hl:#ded0c8;
-  --success:#437a22;--success-hl:#d3dfcc;
-  --orange:#da7101;--orange-hl:#e8d9c5;
-  --purple:#7a39bb;--purple-hl:#dbd0e0;
-  --shadow-sm:0 1px 3px rgba(30,40,80,.07);
-  --shadow-md:0 4px 14px rgba(30,40,80,.10);
-  --shadow-lg:0 12px 36px rgba(30,40,80,.14);
+  /* Backgrounds */
+  --bg:#eef0f4;
+  --surface:#f5f6f8;
+  --surface-2:#f9fafb;
+  --surface-off:#e6e8ed;
+  --surface-dyn:#dcdfe6;
+
+  /* Borders / dividers */
+  --border:rgba(80,90,110,.13);
+  --divider:rgba(80,90,110,.08);
+
+  /* Text */
+  --text:#2c3143;
+  --text-muted:#606880;
+  --text-faint:#a0a8bc;
+  --text-inv:#eef0f4;
+
+  /* Primary accent – mid-blue */
+  --primary:#0066cc;
+  --primary-h:#0052a3;
+  --primary-hl:#d6e8f8;
+
+  /* Semantic colours */
+  --error:#b83c6e;--error-hl:#ead5e2;
+  --warn:#8a4a1a;--warn-hl:#e4d5c8;
+  --success:#3d7520;--success-hl:#cfdfc9;
+  --orange:#c96800;--orange-hl:#e8d9c4;
+  --purple:#6e38a8;--purple-hl:#ddd0ec;
+
+  /* Shadows */
+  --shadow-sm:0 1px 3px rgba(44,49,67,.06);
+  --shadow-md:0 4px 14px rgba(44,49,67,.09);
+  --shadow-lg:0 12px 36px rgba(44,49,67,.13);
+
+  /* Radii, fonts, transitions */
   --r-sm:.375rem;--r-md:.5rem;--r-lg:.75rem;--r-xl:1rem;--r-full:9999px;
   --font-body:'Inter',system-ui,sans-serif;
   --font-mono:'JetBrains Mono',monospace;
   --tr:180ms cubic-bezier(.16,1,.3,1);
   --sidebar-width:260px;
 }
+
+/* ============================================================
+   DARK MODE  –  rich dark-grey + blue accent
+   ============================================================ */
 [data-theme="dark"]{
-  --bg:#0d1117;--surface:#161b25;--surface-2:#1c2130;--surface-off:#181e2b;--surface-dyn:#1f2638;
-  --border:rgba(100,140,255,.09);--divider:rgba(100,140,255,.06);
-  --text:#c9d1e8;--text-muted:#6b7899;--text-faint:#3d4a68;--text-inv:#0d1117;
-  --primary:#4d94ff;--primary-h:#2070e0;--primary-hl:#1a2e4a;
-  --error:#d163a7;--error-hl:#3a2035;
-  --warn:#c97040;--warn-hl:#3d2a1e;
-  --success:#5db844;--success-hl:#1e3320;
-  --orange:#fdab43;--orange-hl:#3d2e16;
-  --purple:#a86fdf;--purple-hl:#2e2040;
-  --shadow-sm:0 1px 3px rgba(0,0,0,.30);
-  --shadow-md:0 4px 14px rgba(0,0,0,.40);
-  --shadow-lg:0 12px 36px rgba(0,0,0,.55);
+  /* Backgrounds – true dark-grey, no blue tint */
+  --bg:#1a1b1e;
+  --surface:#222428;
+  --surface-2:#27292e;
+  --surface-off:#1e2023;
+  --surface-dyn:#2c2f35;
+
+  /* Borders / dividers */
+  --border:rgba(255,255,255,.08);
+  --divider:rgba(255,255,255,.05);
+
+  /* Text */
+  --text:#d4d6dc;
+  --text-muted:#80848f;
+  --text-faint:#44474f;
+  --text-inv:#1a1b1e;
+
+  /* Primary accent – vivid blue */
+  --primary:#0066cc;
+  --primary-h:#0052a3;
+  --primary-hl:#0a2a45;
+
+  /* Semantic colours – muted, but readable on dark */
+  --error:#cc5588;--error-hl:#3a1f2d;
+  --warn:#c07838;--warn-hl:#352416;
+  --success:#52a83a;--success-hl:#1a3018;
+  --orange:#e09030;--orange-hl:#352810;
+  --purple:#9060cc;--purple-hl:#281840;
+
+  /* Shadows */
+  --shadow-sm:0 1px 4px rgba(0,0,0,.35);
+  --shadow-md:0 4px 16px rgba(0,0,0,.45);
+  --shadow-lg:0 12px 40px rgba(0,0,0,.60);
 }
+
 html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-body{font-family:var(--font-body);font-size:14px;color:var(--text);background:var(--bg);min-height:100dvh;line-height:1.6;display:flex;flex-direction:column;overflow:hidden}
+body{
+  font-family:var(--font-body);
+  font-size:14px;
+  color:var(--text);
+  background:var(--bg);
+  min-height:100dvh;
+  line-height:1.6;
+  display:flex;
+  flex-direction:column;
+  /* CRITICAL: no overflow:hidden here – let children control scroll */
+  overflow:hidden;
+}
 button,input,select{font:inherit;color:inherit;cursor:pointer}
 button{background:none;border:none}
 
 /* ============ APP SHELL ============ */
-.app-shell{display:flex;flex:1;height:100dvh;overflow:hidden;position:relative}
+.app-shell{
+  display:flex;
+  flex:1;
+  height:100dvh;
+  overflow:hidden;
+  position:relative;
+}
 
 /* ============ SIDEBAR ============ */
 .sidebar{
@@ -71,54 +141,28 @@ button{background:none;border:none}
 }
 .sidebar-header{
   padding:1rem 1.125rem .75rem;
-  display:flex;
-  align-items:center;
-  gap:.625rem;
+  display:flex;align-items:center;gap:.625rem;
   border-bottom:1px solid var(--divider);
   flex-shrink:0;
 }
-.sidebar-logo{
-  display:flex;
-  align-items:center;
-  gap:.5rem;
-  flex:1;
-  text-decoration:none;
-}
+.sidebar-logo{display:flex;align-items:center;gap:.5rem;flex:1;text-decoration:none}
 .sidebar-logo-icon{width:28px;height:28px;flex-shrink:0}
 .sidebar-logo-text{font-family:var(--font-mono);font-size:.9rem;font-weight:700;color:var(--text);letter-spacing:-.02em;white-space:nowrap}
 .sidebar-logo-text span{color:var(--primary)}
-.sidebar-nav{
-  flex:1;
-  overflow-y:auto;
-  padding:.5rem 0;
-}
+.sidebar-nav{flex:1;overflow-y:auto;padding:.5rem 0}
 .sidebar-nav::-webkit-scrollbar{width:4px}
 .sidebar-nav::-webkit-scrollbar-track{background:transparent}
 .sidebar-nav::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 .nav-section-label{
-  font-size:10px;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:var(--text-faint);
-  padding:.5rem 1.125rem .25rem;
-  margin-top:.25rem;
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--text-faint);padding:.5rem 1.125rem .25rem;margin-top:.25rem;
 }
 .nav-item{
-  display:flex;
-  align-items:center;
-  gap:.625rem;
-  padding:.5rem 1.125rem;
-  font-size:13px;
-  font-weight:500;
-  color:var(--text-muted);
-  border-radius:0;
-  width:100%;
-  text-align:left;
+  display:flex;align-items:center;gap:.625rem;padding:.5rem 1.125rem;
+  font-size:13px;font-weight:500;color:var(--text-muted);
+  width:100%;text-align:left;
   transition:background var(--tr),color var(--tr);
-  cursor:pointer;
-  border:none;
-  background:none;
+  cursor:pointer;border:none;background:none;
 }
 .nav-item svg{width:16px;height:16px;flex-shrink:0;opacity:.7}
 .nav-item:hover{background:var(--surface-dyn);color:var(--text)}
@@ -127,9 +171,7 @@ button{background:none;border:none}
 .sidebar-footer{
   padding:.75rem 1.125rem;
   border-top:1px solid var(--divider);
-  font-size:11px;
-  color:var(--text-faint);
-  flex-shrink:0;
+  font-size:11px;color:var(--text-faint);flex-shrink:0;
 }
 .sidebar-version{font-family:var(--font-mono)}
 
@@ -145,86 +187,117 @@ button{background:none;border:none}
 
 /* ============ HEADER ============ */
 .header{
-  position:relative;
-  z-index:100;
+  position:relative;z-index:100;
   background:color-mix(in oklab,var(--bg) 88%,transparent);
   backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
   padding:.75rem 1.25rem;
-  display:flex;
-  align-items:center;
-  gap:.875rem;
+  display:flex;align-items:center;gap:.875rem;
   flex-shrink:0;
 }
 .btn-sidebar-toggle{
-  width:34px;
-  height:34px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:var(--r-md);
-  color:var(--text-muted);
-  transition:background var(--tr),color var(--tr);
-  flex-shrink:0;
+  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  border-radius:var(--r-md);color:var(--text-muted);
+  transition:background var(--tr),color var(--tr);flex-shrink:0;
 }
 .btn-sidebar-toggle:hover{background:var(--surface-dyn);color:var(--text)}
 .header-title{
-  font-family:var(--font-mono);
-  font-size:.875rem;
-  font-weight:700;
-  color:var(--text);
-  flex-shrink:0;
-  display:none;
+  font-family:var(--font-mono);font-size:.875rem;font-weight:700;
+  color:var(--text);flex-shrink:0;display:none;
 }
 @media(max-width:500px){.header-title{display:block}}
 .header-center{flex:1;min-width:0}
 .search-wrap{position:relative}
 .search-wrap svg{position:absolute;left:.625rem;top:50%;transform:translateY(-50%);color:var(--text-faint);pointer-events:none;width:15px;height:15px}
-.search{width:100%;max-width:360px;padding:.4rem .75rem .4rem 2rem;background:var(--surface-off);border:1px solid var(--border);border-radius:var(--r-full);font-size:13px;color:var(--text);transition:border-color var(--tr),box-shadow var(--tr);outline:none}
+.search{
+  width:100%;max-width:360px;padding:.4rem .75rem .4rem 2rem;
+  background:var(--surface-off);border:1px solid var(--border);
+  border-radius:var(--r-full);font-size:13px;color:var(--text);
+  transition:border-color var(--tr),box-shadow var(--tr);outline:none;
+}
 .search:focus{border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in oklab,var(--primary) 18%,transparent)}
 .search::placeholder{color:var(--text-faint)}
 .header-right{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
-.btn-icon{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:var(--r-md);color:var(--text-muted);transition:background var(--tr),color var(--tr)}
+.btn-icon{
+  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  border-radius:var(--r-md);color:var(--text-muted);
+  transition:background var(--tr),color var(--tr);
+}
 .btn-icon:hover{background:var(--surface-dyn);color:var(--text)}
-.btn-export{padding:.4rem .875rem;background:var(--primary);color:#fff;border-radius:var(--r-md);font-size:12px;font-weight:600;transition:background var(--tr);white-space:nowrap}
+.btn-export{
+  padding:.4rem .875rem;background:var(--primary);color:#fff;
+  border-radius:var(--r-md);font-size:12px;font-weight:600;
+  transition:background var(--tr);white-space:nowrap;
+}
 .btn-export:hover{background:var(--primary-h)}
 
-/* ============ SCROLLABLE BODY ============ */
+/* ============ PAGE BODY – the ONE scrollable region ============ */
 .page-body{
   flex:1;
   overflow-y:auto;
   overflow-x:hidden;
-  padding-bottom:3rem;
+  /* No padding-bottom here; each view manages its own spacing */
 }
 .page-body::-webkit-scrollbar{width:5px}
 .page-body::-webkit-scrollbar-track{background:transparent}
 .page-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 
 /* ============ VIEWS ============ */
+/*
+  KEY FIX: views must NOT use display:block when active.
+  Instead we keep them as block but allow the page-body to
+  scroll through the full natural height of each view.
+  No height:100% / overflow on .view itself!
+*/
 .view{display:none;animation:fadeIn 200ms ease}
 .view.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 /* ============ FILTERS ============ */
-.filters{padding:.625rem 1.25rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;border-bottom:1px solid var(--divider)}
+.filters{
+  padding:.625rem 1.25rem;
+  display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;
+  border-bottom:1px solid var(--divider);
+  position:sticky;top:0;z-index:10;
+  background:var(--bg);
+}
 .filter-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text-faint);margin-right:.25rem}
-.filter-btn{padding:.3rem .625rem;border-radius:var(--r-full);border:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text-muted);background:var(--surface);transition:all var(--tr)}
+.filter-btn{
+  padding:.3rem .625rem;border-radius:var(--r-full);
+  border:1px solid var(--border);font-size:12px;font-weight:500;
+  color:var(--text-muted);background:var(--surface);
+  transition:all var(--tr);
+}
 .filter-btn:hover{border-color:var(--primary);color:var(--primary)}
 .filter-btn.active{background:var(--primary);border-color:var(--primary);color:#fff}
 .filter-sep{width:1px;height:18px;background:var(--divider);margin:0 .25rem}
 
 /* ============ MAIN TASK LIST ============ */
-.main{padding:1.125rem 1.25rem;max-width:1400px;margin:0 auto}
+.main{padding:1.125rem 1.25rem 3rem;max-width:1400px;margin:0 auto}
 .phases-grid{display:flex;flex-direction:column;gap:1rem}
 
 /* PHASE CARD */
-.phase-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow-sm);transition:box-shadow var(--tr)}
+.phase-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-xl);overflow:hidden;
+  box-shadow:var(--shadow-sm);transition:box-shadow var(--tr);
+}
 .phase-card:hover{box-shadow:var(--shadow-md)}
-.phase-header{padding:.875rem 1.125rem;display:flex;align-items:center;gap:.75rem;cursor:pointer;user-select:none;transition:background var(--tr)}
+.phase-header{
+  padding:.875rem 1.125rem;display:flex;align-items:center;gap:.75rem;
+  cursor:pointer;user-select:none;transition:background var(--tr);
+}
 .phase-header:hover{background:var(--surface-dyn)}
-.phase-toggle{width:18px;height:18px;display:flex;align-items:center;justify-content:center;color:var(--text-faint);flex-shrink:0;transition:transform var(--tr)}
+.phase-toggle{
+  width:18px;height:18px;display:flex;align-items:center;justify-content:center;
+  color:var(--text-faint);flex-shrink:0;transition:transform var(--tr);
+}
 .phase-card.collapsed .phase-toggle{transform:rotate(-90deg)}
-.phase-badge{font-family:var(--font-mono);font-size:11px;font-weight:700;padding:.2rem .5rem;border-radius:var(--r-sm);background:var(--primary-hl);color:var(--primary);flex-shrink:0}
+.phase-badge{
+  font-family:var(--font-mono);font-size:11px;font-weight:700;
+  padding:.2rem .5rem;border-radius:var(--r-sm);
+  background:var(--primary-hl);color:var(--primary);flex-shrink:0;
+}
 .phase-title{font-size:14px;font-weight:600;flex:1}
 .phase-meta{display:flex;align-items:center;gap:.625rem;flex-shrink:0}
 .phase-progress{font-size:11px;font-weight:600;font-family:var(--font-mono);color:var(--text-muted)}
@@ -235,7 +308,11 @@ button{background:none;border:none}
 
 /* TODO TABLE */
 .todo-table{width:100%;border-collapse:collapse}
-.todo-table th{padding:.5rem 1rem;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text-faint);border-bottom:1px solid var(--divider);background:var(--surface-off)}
+.todo-table th{
+  padding:.5rem 1rem;text-align:left;font-size:11px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.05em;color:var(--text-faint);
+  border-bottom:1px solid var(--divider);background:var(--surface-off);
+}
 .todo-table th:first-child{padding-left:1.125rem;width:44px}
 .todo-table td{padding:.6rem 1rem;border-bottom:1px solid var(--divider);vertical-align:middle;font-size:13px}
 .todo-table td:first-child{padding-left:1.125rem}
@@ -247,7 +324,12 @@ button{background:none;border:none}
 
 /* CHECKBOX */
 .cb-wrap{display:flex;align-items:center;justify-content:center}
-.cb{width:18px;height:18px;border-radius:var(--r-sm);border:2px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--tr);flex-shrink:0;background:var(--surface)}
+.cb{
+  width:18px;height:18px;border-radius:var(--r-sm);
+  border:2px solid var(--border);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all var(--tr);flex-shrink:0;background:var(--surface);
+}
 .cb:hover{border-color:var(--primary)}
 .cb.checked{background:var(--primary);border-color:var(--primary)}
 .cb.checked::after{content:'';display:block;width:5px;height:9px;border:2px solid #fff;border-top:none;border-left:none;transform:rotate(45deg) translateY(-1px)}
@@ -264,7 +346,11 @@ button{background:none;border:none}
 .prio.low{background:var(--success-hl);color:var(--success)}
 
 /* CATEGORY BADGE */
-.cat{display:inline-flex;padding:.18rem .5rem;border-radius:var(--r-full);font-size:11px;font-weight:500;border:1px solid var(--border);color:var(--text-muted);white-space:nowrap}
+.cat{
+  display:inline-flex;padding:.18rem .5rem;border-radius:var(--r-full);
+  font-size:11px;font-weight:500;border:1px solid var(--border);
+  color:var(--text-muted);white-space:nowrap;
+}
 
 /* TASK NAME / DESC */
 .task-name{font-weight:600;color:var(--text);font-size:13px;line-height:1.3;margin-bottom:.15rem}
@@ -276,57 +362,43 @@ button{background:none;border:none}
 .empty-state h3{font-size:14px;font-weight:600;color:var(--text);margin-bottom:.25rem}
 .empty-state p{font-size:13px}
 
-/* ============ DASHBOARD VIEW ============ */
-/* The dashboard sits inside .page-body which already scrolls */
+/* ============ DASHBOARD VIEW ============
+   The dashboard is a normal block child of .page-body.
+   .page-body has overflow-y:auto, so it scrolls naturally.
+   We just need sensible padding and no fixed/overflow constraints.
+============================================ */
 .dashboard{
-  padding:1.25rem 1.25rem 2rem;
+  padding:1.5rem 1.5rem 4rem;
   max-width:1200px;
   margin:0 auto;
   display:flex;
   flex-direction:column;
   gap:1.5rem;
 }
-.dash-heading{
-  font-size:1.125rem;
-  font-weight:700;
-  color:var(--text);
-  letter-spacing:-.02em;
-}
-.dash-subheading{
-  font-size:12px;
-  color:var(--text-muted);
-  margin-top:.2rem;
-}
+.dash-heading{font-size:1.125rem;font-weight:700;color:var(--text);letter-spacing:-.02em}
+.dash-subheading{font-size:12px;color:var(--text-muted);margin-top:.2rem}
 .dash-section-title{
-  font-size:11px;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:.07em;
-  color:var(--text-faint);
-  margin-bottom:.75rem;
+  font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.07em;color:var(--text-faint);margin-bottom:.75rem;
 }
 
 /* Overall progress card */
 .dash-progress-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--r-xl);
-  padding:1.25rem 1.5rem;
-  display:flex;
-  align-items:center;
-  gap:2rem;
-  flex-wrap:wrap;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-xl);padding:1.25rem 1.5rem;
+  display:flex;align-items:center;gap:2rem;flex-wrap:wrap;
 }
-.dash-pct-ring{
-  position:relative;
-  width:80px;
-  height:80px;
-  flex-shrink:0;
-}
+.dash-pct-ring{position:relative;width:80px;height:80px;flex-shrink:0}
 .dash-pct-ring svg{width:80px;height:80px;transform:rotate(-90deg)}
 .dash-pct-ring .ring-bg{fill:none;stroke:var(--surface-off);stroke-width:7}
-.dash-pct-ring .ring-fill{fill:none;stroke:var(--primary);stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset .6s cubic-bezier(.16,1,.3,1)}
-.dash-pct-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:1rem;font-weight:700;color:var(--primary)}
+.dash-pct-ring .ring-fill{
+  fill:none;stroke:var(--primary);stroke-width:7;stroke-linecap:round;
+  transition:stroke-dashoffset .6s cubic-bezier(.16,1,.3,1);
+}
+.dash-pct-label{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:1rem;font-weight:700;color:var(--primary);
+}
 .dash-progress-info{flex:1}
 .dash-progress-title{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.2rem}
 .dash-progress-sub{font-size:12px;color:var(--text-muted)}
@@ -334,194 +406,62 @@ button{background:none;border:none}
 .dash-progress-bar-fill{height:100%;background:var(--primary);border-radius:var(--r-full);transition:width .5s ease}
 
 /* Stat cards grid */
-.dash-cards-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-  gap:.75rem;
-}
+.dash-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.75rem}
 .dash-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--r-xl);
-  padding:1rem 1.125rem;
-  display:flex;
-  flex-direction:column;
-  gap:.25rem;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-xl);padding:1rem 1.125rem;
+  display:flex;flex-direction:column;gap:.25rem;
   transition:box-shadow var(--tr),border-color var(--tr);
 }
 .dash-card:hover{box-shadow:var(--shadow-md);border-color:color-mix(in oklab,var(--primary) 25%,var(--border))}
-.dash-card-icon{
-  width:32px;
-  height:32px;
-  border-radius:var(--r-md);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:.5rem;
-}
+.dash-card-icon{width:32px;height:32px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;margin-bottom:.5rem}
 .dash-card-icon svg{width:16px;height:16px}
-.dash-card-value{
-  font-family:var(--font-mono);
-  font-size:1.5rem;
-  font-weight:700;
-  line-height:1;
-}
-.dash-card-label{
-  font-size:11px;
-  color:var(--text-muted);
-  font-weight:500;
-}
-.dash-card-sub{
-  font-size:10px;
-  color:var(--text-faint);
-  margin-top:.1rem;
-}
+.dash-card-value{font-family:var(--font-mono);font-size:1.5rem;font-weight:700;line-height:1}
+.dash-card-label{font-size:11px;color:var(--text-muted);font-weight:500}
+.dash-card-sub{font-size:10px;color:var(--text-faint);margin-top:.1rem}
 
 /* Category breakdown */
-.dash-cat-grid{
-  display:flex;
-  flex-direction:column;
-  gap:.5rem;
-}
+.dash-cat-grid{display:flex;flex-direction:column;gap:.5rem}
 .dash-cat-row{
-  display:flex;
-  align-items:center;
-  gap:.75rem;
+  display:flex;align-items:center;gap:.75rem;
   padding:.5rem .75rem;
-  background:var(--surface);
-  border:1px solid var(--border);
+  background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r-lg);
 }
-.dash-cat-label{
-  font-size:12px;
-  font-weight:500;
-  color:var(--text);
-  min-width:120px;
-  flex-shrink:0;
-}
-.dash-cat-bar-wrap{
-  flex:1;
-  height:5px;
-  background:var(--surface-off);
-  border-radius:var(--r-full);
-  overflow:hidden;
-}
-.dash-cat-bar-fill{
-  height:100%;
-  background:var(--primary);
-  border-radius:var(--r-full);
-  transition:width .5s ease;
-}
-.dash-cat-count{
-  font-family:var(--font-mono);
-  font-size:11px;
-  font-weight:600;
-  color:var(--text-muted);
-  min-width:40px;
-  text-align:right;
-  flex-shrink:0;
-}
-.dash-cat-done{
-  font-size:10px;
-  color:var(--text-faint);
-  min-width:34px;
-  text-align:right;
-  flex-shrink:0;
-}
+.dash-cat-label{font-size:12px;font-weight:500;color:var(--text);min-width:120px;flex-shrink:0}
+.dash-cat-bar-wrap{flex:1;height:5px;background:var(--surface-off);border-radius:var(--r-full);overflow:hidden}
+.dash-cat-bar-fill{height:100%;background:var(--primary);border-radius:var(--r-full);transition:width .5s ease}
+.dash-cat-count{font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--text-muted);min-width:40px;text-align:right;flex-shrink:0}
+.dash-cat-done{font-size:10px;color:var(--text-faint);min-width:34px;text-align:right;flex-shrink:0}
 
 /* ============ STATUS BAR (bottom) ============ */
 .status-bar{
-  flex-shrink:0;
-  height:36px;
-  background:var(--surface);
-  border-top:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  padding:0 1rem;
-  gap:.875rem;
-  overflow:hidden;
-  font-size:11px;
-  z-index:50;
+  flex-shrink:0;height:36px;
+  background:var(--surface);border-top:1px solid var(--border);
+  display:flex;align-items:center;padding:0 1rem;gap:.875rem;
+  overflow:hidden;font-size:11px;z-index:50;
 }
-.status-bar-left{
-  display:flex;
-  align-items:center;
-  gap:.875rem;
-  flex:1;
-  min-width:0;
-  overflow:hidden;
-}
-.status-pill{
-  display:flex;
-  align-items:center;
-  gap:.35rem;
-  white-space:nowrap;
-  color:var(--text-muted);
-  font-weight:500;
-}
-.status-pill .sdot{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  flex-shrink:0;
-}
-.status-bar-progress{
-  display:flex;
-  align-items:center;
-  gap:.5rem;
-  flex-shrink:0;
-}
-.status-bar-progress-track{
-  width:100px;
-  height:4px;
-  background:var(--surface-off);
-  border-radius:var(--r-full);
-  overflow:hidden;
-}
-.status-bar-progress-fill{
-  height:100%;
-  background:var(--primary);
-  border-radius:var(--r-full);
-  transition:width .4s ease;
-}
-.status-bar-pct{
-  font-family:var(--font-mono);
-  font-size:11px;
-  font-weight:700;
-  color:var(--primary);
-  min-width:2.5rem;
-}
-.status-bar-done{
-  font-size:11px;
-  color:var(--text-muted);
-  font-family:var(--font-mono);
-  white-space:nowrap;
-}
+.status-bar-left{display:flex;align-items:center;gap:.875rem;flex:1;min-width:0;overflow:hidden}
+.status-pill{display:flex;align-items:center;gap:.35rem;white-space:nowrap;color:var(--text-muted);font-weight:500}
+.status-pill .sdot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.status-bar-progress{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.status-bar-progress-track{width:100px;height:4px;background:var(--surface-off);border-radius:var(--r-full);overflow:hidden}
+.status-bar-progress-fill{height:100%;background:var(--primary);border-radius:var(--r-full);transition:width .4s ease}
+.status-bar-pct{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--primary);min-width:2.5rem}
+.status-bar-done{font-size:11px;color:var(--text-muted);font-family:var(--font-mono);white-space:nowrap}
 
-/* Mobile sidebar overlay */
+/* ============ MOBILE ============ */
 @media(max-width:768px){
-  .sidebar{
-    position:absolute;
-    top:0;
-    left:0;
-    height:100%;
-    box-shadow:var(--shadow-lg);
-  }
-  .sidebar-overlay{
-    display:none;
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,.4);
-    z-index:190;
-  }
+  .sidebar{position:absolute;top:0;left:0;height:100%;box-shadow:var(--shadow-lg)}
+  .sidebar-overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:190}
   .sidebar-overlay.visible{display:block}
   .todo-table th:nth-child(4),.todo-table td:nth-child(4),
   .todo-table th:nth-child(5),.todo-table td:nth-child(5){display:none}
   .task-desc{display:none}
   .header{padding:.625rem 1rem;gap:.625rem}
   .filters{padding:.625rem 1rem}
-  .main{padding:.875rem 1rem}
-  .dashboard{padding:1rem 1rem 2rem}
+  .main{padding:.875rem 1rem 3rem}
+  .dashboard{padding:1rem 1rem 3rem}
   .status-pill:nth-child(n+4){display:none}
 }
 </style>
@@ -575,7 +515,7 @@ button{background:none;border:none}
   <!-- Mobile overlay -->
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <!-- CONTENT -->
+  <!-- CONTENT AREA -->
   <div class="content-area">
 
     <!-- HEADER -->
@@ -598,8 +538,8 @@ button{background:none;border:none}
       </div>
     </header>
 
-    <!-- PAGE BODY -->
-    <div class="page-body">
+    <!-- PAGE BODY: the single scrollable container -->
+    <div class="page-body" id="pageBody">
 
       <!-- VIEW: TASKS -->
       <div class="view active" id="view-tasks">
@@ -618,7 +558,9 @@ button{background:none;border:none}
     <div class="status-bar" id="statusBar">
       <div class="status-bar-left" id="statusBarLeft"></div>
       <div class="status-bar-progress">
-        <div class="status-bar-progress-track"><div class="status-bar-progress-fill" id="statusBarFill" style="width:0%"></div></div>
+        <div class="status-bar-progress-track">
+          <div class="status-bar-progress-fill" id="statusBarFill" style="width:0%"></div>
+        </div>
         <span class="status-bar-pct" id="statusBarPct">0%</span>
         <span class="status-bar-done" id="statusBarDone">0 / 0</span>
       </div>
@@ -729,92 +671,69 @@ const TODOS = {
 
 const PRIO_ORDER = {critical:0,high:1,medium:2,low:3};
 const PRIO_LABELS = {critical:'Critical',high:'High',medium:'Medium',low:'Low'};
-const PRIO_COLORS = {critical:'var(--error)',high:'var(--warn)',medium:'var(--orange)',low:'var(--success)'};
 const CAT_LABELS = {structure:'Structure',params:'Parameters',profile:'Profile Mgmt',launcher:'Launcher',logging:'Logging',gui:'GUI Modes',settings:'Settings',robustness:'Robustness',testing:'Testing',docs:'Documentation'};
 
 let state = {};
-let activeFilters = {prio: null, cat: null, status: null};
+let activeFilters = {prio:null,cat:null,status:null};
 let currentView = 'tasks';
 
-try { const s = sessionStorage.getItem('superdo_state'); if(s) state = JSON.parse(s); } catch(e){}
-
-function saveState() {
-  try { sessionStorage.setItem('superdo_state', JSON.stringify(state)); } catch(e){}
-}
-
-function allTasks() { return Object.values(TODOS).flat(); }
-function getDoneCount() { return allTasks().filter(t=>state[t[0]]).length; }
-function getTotalCount() { return allTasks().length; }
-
-function getPhaseStats(phase) {
-  const tasks = TODOS[phase];
-  const done = tasks.filter(t=>state[t[0]]).length;
-  return {done, total:tasks.length};
-}
+try{const s=sessionStorage.getItem('superdo_state');if(s)state=JSON.parse(s);}catch(e){}
+function saveState(){try{sessionStorage.setItem('superdo_state',JSON.stringify(state));}catch(e){}}
+function allTasks(){return Object.values(TODOS).flat();}
+function getDoneCount(){return allTasks().filter(t=>state[t[0]]).length;}
+function getTotalCount(){return allTasks().length;}
+function getPhaseStats(phase){const tasks=TODOS[phase];return{done:tasks.filter(t=>state[t[0]]).length,total:tasks.length};}
 
 // ============================================================
 // STATUS BAR
 // ============================================================
-function buildStatusBar() {
-  const total = getTotalCount();
-  const done = getDoneCount();
-  const pct = total ? Math.round(done/total*100) : 0;
-  const byPrio = {critical:0,high:0,medium:0,low:0};
-  allTasks().forEach(t=>{ byPrio[t[3]]++; });
-
-  document.getElementById('statusBarFill').style.width = pct+'%';
-  document.getElementById('statusBarPct').textContent = pct+'%';
-  document.getElementById('statusBarDone').textContent = done+' / '+total;
-
-  document.getElementById('statusBarLeft').innerHTML = `
+function buildStatusBar(){
+  const total=getTotalCount(),done=getDoneCount();
+  const pct=total?Math.round(done/total*100):0;
+  const byPrio={critical:0,high:0,medium:0,low:0};
+  allTasks().forEach(t=>{byPrio[t[3]]++;});
+  document.getElementById('statusBarFill').style.width=pct+'%';
+  document.getElementById('statusBarPct').textContent=pct+'%';
+  document.getElementById('statusBarDone').textContent=done+' / '+total;
+  document.getElementById('statusBarLeft').innerHTML=`
     <span class="status-pill"><span class="sdot" style="background:var(--error)"></span>${byPrio.critical} Critical</span>
     <span class="status-pill"><span class="sdot" style="background:var(--warn)"></span>${byPrio.high} High</span>
     <span class="status-pill"><span class="sdot" style="background:var(--orange)"></span>${byPrio.medium} Medium</span>
-    <span class="status-pill"><span class="sdot" style="background:var(--success)"></span>${byPrio.low} Low</span>
-  `;
+    <span class="status-pill"><span class="sdot" style="background:var(--success)"></span>${byPrio.low} Low</span>`;
 }
 
 // ============================================================
 // FILTERS
 // ============================================================
-function buildFilters() {
-  const bar = document.getElementById('filtersBar');
-  const prioFilters = Object.keys(PRIO_ORDER).map(p=>`<button class="filter-btn prio-filter ${activeFilters.prio===p?'active':''}" data-prio="${p}">${PRIO_LABELS[p]}</button>`).join('');
-  const catFilters = Object.keys(CAT_LABELS).map(c=>`<button class="filter-btn cat-filter ${activeFilters.cat===c?'active':''}" data-cat="${c}">${CAT_LABELS[c]}</button>`).join('');
-  const statusFilters = `
-    <button class="filter-btn status-filter ${activeFilters.status==='open'?'active':''}" data-status="open">Open</button>
-    <button class="filter-btn status-filter ${activeFilters.status==='done'?'active':''}" data-status="done">Completed</button>
-  `;
-  bar.innerHTML = `
+function buildFilters(){
+  const bar=document.getElementById('filtersBar');
+  const prioFilters=Object.keys(PRIO_ORDER).map(p=>`<button class="filter-btn prio-filter ${activeFilters.prio===p?'active':''}" data-prio="${p}">${PRIO_LABELS[p]}</button>`).join('');
+  const catFilters=Object.keys(CAT_LABELS).map(c=>`<button class="filter-btn cat-filter ${activeFilters.cat===c?'active':''}" data-cat="${c}">${CAT_LABELS[c]}</button>`).join('');
+  bar.innerHTML=`
     <span class="filter-label">Priority</span>${prioFilters}
     <div class="filter-sep"></div>
     <span class="filter-label">Category</span>${catFilters}
     <div class="filter-sep"></div>
-    <span class="filter-label">Status</span>${statusFilters}
+    <span class="filter-label">Status</span>
+    <button class="filter-btn status-filter ${activeFilters.status==='open'?'active':''}" data-status="open">Open</button>
+    <button class="filter-btn status-filter ${activeFilters.status==='done'?'active':''}" data-status="done">Completed</button>
     <div class="filter-sep"></div>
-    <button class="filter-btn" id="clearFilters">✕ Reset</button>
-  `;
-  bar.querySelectorAll('.prio-filter').forEach(btn=>{
-    btn.addEventListener('click',()=>{ activeFilters.prio = activeFilters.prio===btn.dataset.prio?null:btn.dataset.prio; rebuild(); });
-  });
-  bar.querySelectorAll('.cat-filter').forEach(btn=>{
-    btn.addEventListener('click',()=>{ activeFilters.cat = activeFilters.cat===btn.dataset.cat?null:btn.dataset.cat; rebuild(); });
-  });
-  bar.querySelectorAll('.status-filter').forEach(btn=>{
-    btn.addEventListener('click',()=>{ activeFilters.status = activeFilters.status===btn.dataset.status?null:btn.dataset.status; rebuild(); });
-  });
-  document.getElementById('clearFilters').addEventListener('click',()=>{ activeFilters={prio:null,cat:null,status:null}; rebuild(); });
+    <button class="filter-btn" id="clearFilters">✕ Reset</button>`;
+  bar.querySelectorAll('.prio-filter').forEach(btn=>btn.addEventListener('click',()=>{activeFilters.prio=activeFilters.prio===btn.dataset.prio?null:btn.dataset.prio;rebuild();}));
+  bar.querySelectorAll('.cat-filter').forEach(btn=>btn.addEventListener('click',()=>{activeFilters.cat=activeFilters.cat===btn.dataset.cat?null:btn.dataset.cat;rebuild();}));
+  bar.querySelectorAll('.status-filter').forEach(btn=>btn.addEventListener('click',()=>{activeFilters.status=activeFilters.status===btn.dataset.status?null:btn.dataset.status;rebuild();}));
+  document.getElementById('clearFilters').addEventListener('click',()=>{activeFilters={prio:null,cat:null,status:null};rebuild();});
 }
 
-function taskMatchesFilters(task, searchVal) {
-  const isDone = !!state[task[0]];
-  if(activeFilters.prio && task[3]!==activeFilters.prio) return false;
-  if(activeFilters.cat && task[4]!==activeFilters.cat) return false;
-  if(activeFilters.status==='open' && isDone) return false;
-  if(activeFilters.status==='done' && !isDone) return false;
-  if(searchVal) {
-    const q = searchVal.toLowerCase();
-    if(!(task[0].toLowerCase().includes(q)||task[1].toLowerCase().includes(q)||task[2].toLowerCase().includes(q)||(CAT_LABELS[task[4]]||'').toLowerCase().includes(q)||(PRIO_LABELS[task[3]]||'').toLowerCase().includes(q))) return false;
+function taskMatchesFilters(task,searchVal){
+  const isDone=!!state[task[0]];
+  if(activeFilters.prio&&task[3]!==activeFilters.prio)return false;
+  if(activeFilters.cat&&task[4]!==activeFilters.cat)return false;
+  if(activeFilters.status==='open'&&isDone)return false;
+  if(activeFilters.status==='done'&&!isDone)return false;
+  if(searchVal){
+    const q=searchVal.toLowerCase();
+    if(!(task[0].toLowerCase().includes(q)||task[1].toLowerCase().includes(q)||task[2].toLowerCase().includes(q)||(CAT_LABELS[task[4]]||'').toLowerCase().includes(q)||(PRIO_LABELS[task[3]]||'').toLowerCase().includes(q)))return false;
   }
   return true;
 }
@@ -822,27 +741,24 @@ function taskMatchesFilters(task, searchVal) {
 // ============================================================
 // TASK LIST
 // ============================================================
-function buildPhases(searchVal='') {
-  const grid = document.getElementById('phasesGrid');
+function buildPhases(searchVal=''){
+  const grid=document.getElementById('phasesGrid');
   grid.innerHTML='';
-  let anyVisible = false;
-
-  Object.entries(TODOS).forEach(([phase, tasks],pi)=>{
-    const phaseKey = 'phase_'+pi;
-    const collapsed = sessionStorage.getItem('superdo_col_'+phaseKey)==='1';
-    const {done,total} = getPhaseStats(phase);
-    const pct = total ? Math.round(done/total*100) : 0;
-    const visibleTasks = tasks.filter(t=>taskMatchesFilters(t,searchVal));
-    if(visibleTasks.length===0 && (activeFilters.prio||activeFilters.cat||activeFilters.status||searchVal)) return;
+  let anyVisible=false;
+  Object.entries(TODOS).forEach(([phase,tasks],pi)=>{
+    const phaseKey='phase_'+pi;
+    const collapsed=sessionStorage.getItem('superdo_col_'+phaseKey)==='1';
+    const {done,total}=getPhaseStats(phase);
+    const pct=total?Math.round(done/total*100):0;
+    const visibleTasks=tasks.filter(t=>taskMatchesFilters(t,searchVal));
+    if(visibleTasks.length===0&&(activeFilters.prio||activeFilters.cat||activeFilters.status||searchVal))return;
     anyVisible=true;
-
-    const card = document.createElement('div');
-    card.className = 'phase-card'+(collapsed?' collapsed':'');
-    card.dataset.phase = phaseKey;
-
-    const phaseNum = phase.match(/Phase (\d+)/)?.[1]||'?';
-    const phaseTitle = phase.replace(/Phase \d+: /,'');
-    card.innerHTML = `
+    const card=document.createElement('div');
+    card.className='phase-card'+(collapsed?' collapsed':'');
+    card.dataset.phase=phaseKey;
+    const phaseNum=phase.match(/Phase (\d+)/)?.[1]||'?';
+    const phaseTitle=phase.replace(/Phase \d+: /,'');
+    card.innerHTML=`
       <div class="phase-header">
         <svg class="phase-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
         <span class="phase-badge">Phase ${phaseNum}</span>
@@ -854,108 +770,78 @@ function buildPhases(searchVal='') {
       </div>
       <div class="phase-body">
         <table class="todo-table">
-          <thead><tr>
-            <th></th>
-            <th>ID</th>
-            <th>Task</th>
-            <th>Priority</th>
-            <th>Category</th>
-          </tr></thead>
+          <thead><tr><th></th><th>ID</th><th>Task</th><th>Priority</th><th>Category</th></tr></thead>
           <tbody id="tbody_${phaseKey}"></tbody>
         </table>
         <div class="empty-state" id="empty_${phaseKey}" style="display:none">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <h3>No matches</h3>
-          <p>No entry in this phase matches the current filter.</p>
+          <h3>No matches</h3><p>No entry in this phase matches the current filter.</p>
         </div>
-      </div>
-    `;
+      </div>`;
     grid.appendChild(card);
-
-    const tbody = document.getElementById('tbody_'+phaseKey);
-    let shown = 0;
+    const tbody=document.getElementById('tbody_'+phaseKey);
+    let shown=0;
     tasks.forEach(task=>{
-      const [id,name,desc,prio,cat] = task;
-      const isDone = !!state[id];
-      const visible = taskMatchesFilters(task,searchVal);
-      const tr = document.createElement('tr');
-      tr.className = (isDone?'done':'')+(!visible?' hidden-row':'');
-      tr.dataset.taskId = id;
-      tr.innerHTML = `
+      const [id,name,desc,prio,cat]=task;
+      const isDone=!!state[id];
+      const visible=taskMatchesFilters(task,searchVal);
+      const tr=document.createElement('tr');
+      tr.className=(isDone?'done':'')+(!visible?' hidden-row':'');
+      tr.dataset.taskId=id;
+      tr.innerHTML=`
         <td><div class="cb-wrap"><div class="cb ${isDone?'checked':''}" data-id="${id}" tabindex="0" role="checkbox" aria-checked="${isDone}" aria-label="${name}"></div></div></td>
         <td><span class="task-id">${id}</span></td>
-        <td>
-          <div class="task-name">${name}</div>
-          <div class="task-desc">${desc}</div>
-        </td>
+        <td><div class="task-name">${name}</div><div class="task-desc">${desc}</div></td>
         <td><span class="prio ${prio}"><span class="prio-dot" style="background:currentColor"></span>${PRIO_LABELS[prio]}</span></td>
-        <td><span class="cat">${CAT_LABELS[cat]||cat}</span></td>
-      `;
+        <td><span class="cat">${CAT_LABELS[cat]||cat}</span></td>`;
       tbody.appendChild(tr);
-      if(visible) shown++;
+      if(visible)shown++;
     });
-
-    if(shown===0 && (activeFilters.prio||activeFilters.cat||activeFilters.status||searchVal)){
-      document.getElementById('empty_'+phaseKey).style.display='';
-    }
-
+    if(shown===0&&(activeFilters.prio||activeFilters.cat||activeFilters.status||searchVal))document.getElementById('empty_'+phaseKey).style.display='';
     card.querySelector('.phase-header').addEventListener('click',()=>{
       card.classList.toggle('collapsed');
-      sessionStorage.setItem('superdo_col_'+phaseKey, card.classList.contains('collapsed')?'1':'0');
+      sessionStorage.setItem('superdo_col_'+phaseKey,card.classList.contains('collapsed')?'1':'0');
     });
   });
-
   if(!anyVisible){
     grid.innerHTML=`<div class="empty-state" style="padding:4rem 1rem">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:48px;height:48px;margin:0 auto 1rem"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <h3>No tasks found</h3>
-      <p>Adjust the filters or search query.</p>
-    </div>`;
+      <h3>No tasks found</h3><p>Adjust the filters or search query.</p></div>`;
   }
-
   document.querySelectorAll('.cb').forEach(cb=>{
     cb.addEventListener('click',()=>toggleTask(cb.dataset.id));
-    cb.addEventListener('keydown',e=>{ if(e.key===' '||e.key==='Enter'){e.preventDefault();toggleTask(cb.dataset.id);} });
+    cb.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();toggleTask(cb.dataset.id);}});
   });
 }
 
 // ============================================================
 // DASHBOARD
 // ============================================================
-function buildDashboard() {
-  const container = document.getElementById('dashboardContent');
-  const total = getTotalCount();
-  const done = getDoneCount();
-  const open = total - done;
-  const pct = total ? Math.round(done/total*100) : 0;
-
-  const byPrio = {critical:0,high:0,medium:0,low:0};
-  const byPrioDone = {critical:0,high:0,medium:0,low:0};
-  const byCat = {};
-  const byCatDone = {};
+function buildDashboard(){
+  const container=document.getElementById('dashboardContent');
+  const total=getTotalCount(),done=getDoneCount(),open=total-done;
+  const pct=total?Math.round(done/total*100):0;
+  const byPrio={critical:0,high:0,medium:0,low:0};
+  const byPrioDone={critical:0,high:0,medium:0,low:0};
+  const byCat={},byCatDone={};
   allTasks().forEach(t=>{
     byPrio[t[3]]++;
-    if(state[t[0]]) byPrioDone[t[3]]++;
-    byCat[t[4]] = (byCat[t[4]]||0)+1;
-    if(state[t[0]]) byCatDone[t[4]] = (byCatDone[t[4]]||0)+1;
+    if(state[t[0]])byPrioDone[t[3]]++;
+    byCat[t[4]]=(byCat[t[4]]||0)+1;
+    if(state[t[0]])byCatDone[t[4]]=(byCatDone[t[4]]||0)+1;
   });
-
-  const circumference = 2 * Math.PI * 34;
-  const offset = circumference - (pct/100)*circumference;
-
-  container.innerHTML = `
+  const circumference=2*Math.PI*34;
+  const offset=circumference-(pct/100)*circumference;
+  container.innerHTML=`
     <div>
       <div class="dash-heading">Dashboard</div>
       <div class="dash-subheading">Overview &middot; PSAppRocket Tasks</div>
     </div>
-
     <div class="dash-progress-card">
       <div class="dash-pct-ring">
         <svg viewBox="0 0 80 80">
           <circle class="ring-bg" cx="40" cy="40" r="34"/>
-          <circle class="ring-fill" cx="40" cy="40" r="34"
-            stroke-dasharray="${circumference.toFixed(2)}"
-            stroke-dashoffset="${offset.toFixed(2)}"/>
+          <circle class="ring-fill" cx="40" cy="40" r="34" stroke-dasharray="${circumference.toFixed(2)}" stroke-dashoffset="${offset.toFixed(2)}"/>
         </svg>
         <div class="dash-pct-label">${pct}%</div>
       </div>
@@ -965,68 +851,54 @@ function buildDashboard() {
         <div class="dash-progress-bar-wrap"><div class="dash-progress-bar-fill" style="width:${pct}%"></div></div>
       </div>
     </div>
-
     <div>
-      <div class="dash-section-title">Priority</div>
+      <div class="dash-section-title">By Priority</div>
       <div class="dash-cards-grid">
         <div class="dash-card">
-          <div class="dash-card-icon" style="background:var(--error-hl)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--error)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          </div>
+          <div class="dash-card-icon" style="background:var(--error-hl)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--error)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
           <div class="dash-card-value" style="color:var(--error)">${byPrio.critical}</div>
           <div class="dash-card-label">Critical</div>
           <div class="dash-card-sub">${byPrioDone.critical} completed</div>
         </div>
         <div class="dash-card">
-          <div class="dash-card-icon" style="background:var(--warn-hl)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--warn)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
+          <div class="dash-card-icon" style="background:var(--warn-hl)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warn)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
           <div class="dash-card-value" style="color:var(--warn)">${byPrio.high}</div>
           <div class="dash-card-label">High</div>
           <div class="dash-card-sub">${byPrioDone.high} completed</div>
         </div>
         <div class="dash-card">
-          <div class="dash-card-icon" style="background:var(--orange-hl)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          </div>
+          <div class="dash-card-icon" style="background:var(--orange-hl)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
           <div class="dash-card-value" style="color:var(--orange)">${byPrio.medium}</div>
           <div class="dash-card-label">Medium</div>
           <div class="dash-card-sub">${byPrioDone.medium} completed</div>
         </div>
         <div class="dash-card">
-          <div class="dash-card-icon" style="background:var(--success-hl)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
+          <div class="dash-card-icon" style="background:var(--success-hl)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="dash-card-value" style="color:var(--success)">${byPrio.low}</div>
           <div class="dash-card-label">Low</div>
           <div class="dash-card-sub">${byPrioDone.low} completed</div>
         </div>
         <div class="dash-card">
-          <div class="dash-card-icon" style="background:var(--primary-hl)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="9 11 12 14 22 4"/></svg>
-          </div>
+          <div class="dash-card-icon" style="background:var(--primary-hl)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="9 11 12 14 22 4"/></svg></div>
           <div class="dash-card-value" style="color:var(--primary)">${done}</div>
           <div class="dash-card-label">Completed</div>
           <div class="dash-card-sub">of ${total} total</div>
         </div>
         <div class="dash-card">
-          <div class="dash-card-icon" style="background:var(--surface-dyn)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-          </div>
+          <div class="dash-card-icon" style="background:var(--surface-dyn)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
           <div class="dash-card-value">${open}</div>
           <div class="dash-card-label">Open</div>
-          <div class="dash-card-sub">${total > 0 ? (100-pct) : 0}% pending</div>
+          <div class="dash-card-sub">${total>0?(100-pct):0}% pending</div>
         </div>
       </div>
     </div>
-
     <div>
       <div class="dash-section-title">Category Breakdown</div>
       <div class="dash-cat-grid">
         ${Object.entries(CAT_LABELS).map(([key,label])=>{
-          const count = byCat[key]||0;
-          const doneCount = byCatDone[key]||0;
-          const catPct = count ? Math.round(doneCount/count*100) : 0;
+          const count=byCat[key]||0;
+          const doneCount=byCatDone[key]||0;
+          const catPct=count?Math.round(doneCount/count*100):0;
           return `<div class="dash-cat-row">
             <span class="dash-cat-label">${label}</span>
             <div class="dash-cat-bar-wrap"><div class="dash-cat-bar-fill" style="width:${catPct}%"></div></div>
@@ -1035,82 +907,66 @@ function buildDashboard() {
           </div>`;
         }).join('')}
       </div>
-    </div>
-  `;
+    </div>`;
 }
 
 // ============================================================
 // VIEWS
 // ============================================================
-function switchView(viewId) {
-  currentView = viewId;
+function switchView(viewId){
+  currentView=viewId;
+  // Reset scroll position when switching views
+  const pb=document.getElementById('pageBody');
+  if(pb)pb.scrollTop=0;
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  const el = document.getElementById('view-'+viewId);
-  if(el) el.classList.add('active');
-
+  const el=document.getElementById('view-'+viewId);
+  if(el)el.classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  const navEl = document.getElementById('nav-'+viewId);
-  if(navEl) navEl.classList.add('active');
-
-  if(viewId === 'dashboard') buildDashboard();
-  if(window.innerWidth <= 768) closeSidebar();
+  const navEl=document.getElementById('nav-'+viewId);
+  if(navEl)navEl.classList.add('active');
+  if(viewId==='dashboard')buildDashboard();
+  if(window.innerWidth<=768)closeSidebar();
 }
 
 // ============================================================
-// SIDEBAR TOGGLE
+// SIDEBAR
 // ============================================================
-function openSidebar() {
-  document.getElementById('sidebar').classList.remove('collapsed');
-  document.getElementById('sidebarOverlay').classList.add('visible');
-}
-function closeSidebar() {
-  document.getElementById('sidebar').classList.add('collapsed');
-  document.getElementById('sidebarOverlay').classList.remove('visible');
-}
-function toggleSidebar() {
-  const sb = document.getElementById('sidebar');
-  if(sb.classList.contains('collapsed')) openSidebar();
-  else closeSidebar();
-}
+function openSidebar(){document.getElementById('sidebar').classList.remove('collapsed');document.getElementById('sidebarOverlay').classList.add('visible');}
+function closeSidebar(){document.getElementById('sidebar').classList.add('collapsed');document.getElementById('sidebarOverlay').classList.remove('visible');}
+function toggleSidebar(){const sb=document.getElementById('sidebar');if(sb.classList.contains('collapsed'))openSidebar();else closeSidebar();}
+document.getElementById('btnSidebarToggle').addEventListener('click',toggleSidebar);
+document.getElementById('sidebarOverlay').addEventListener('click',closeSidebar);
 
-document.getElementById('btnSidebarToggle').addEventListener('click', toggleSidebar);
-document.getElementById('sidebarOverlay').addEventListener('click', closeSidebar);
-
-// Nav items
-document.getElementById('nav-tasks').addEventListener('click',()=>{ activeFilters={prio:null,cat:null,status:null}; switchView('tasks'); rebuild(); });
-document.getElementById('nav-dashboard').addEventListener('click',()=>{ switchView('dashboard'); });
-document.getElementById('nav-critical').addEventListener('click',()=>{ activeFilters={prio:'critical',cat:null,status:null}; switchView('tasks'); rebuild(); });
-document.getElementById('nav-open').addEventListener('click',()=>{ activeFilters={prio:null,cat:null,status:'open'}; switchView('tasks'); rebuild(); });
-document.getElementById('nav-done').addEventListener('click',()=>{ activeFilters={prio:null,cat:null,status:'done'}; switchView('tasks'); rebuild(); });
+document.getElementById('nav-tasks').addEventListener('click',()=>{activeFilters={prio:null,cat:null,status:null};switchView('tasks');rebuild();});
+document.getElementById('nav-dashboard').addEventListener('click',()=>{switchView('dashboard');});
+document.getElementById('nav-critical').addEventListener('click',()=>{activeFilters={prio:'critical',cat:null,status:null};switchView('tasks');rebuild();});
+document.getElementById('nav-open').addEventListener('click',()=>{activeFilters={prio:null,cat:null,status:'open'};switchView('tasks');rebuild();});
+document.getElementById('nav-done').addEventListener('click',()=>{activeFilters={prio:null,cat:null,status:'done'};switchView('tasks');rebuild();});
 
 // ============================================================
 // TOGGLE TASK
 // ============================================================
-function toggleTask(id) {
-  state[id] = !state[id];
-  saveState();
-  rebuild();
-}
+function toggleTask(id){state[id]=!state[id];saveState();rebuild();}
 
 // ============================================================
 // THEME
 // ============================================================
-const html = document.documentElement;
-let theme = html.getAttribute('data-theme')||'dark';
-const themeBtn = document.getElementById('themeToggle');
+const html=document.documentElement;
+let theme=html.getAttribute('data-theme')||'dark';
+const themeBtn=document.getElementById('themeToggle');
 function setTheme(t){
-  theme=t; html.setAttribute('data-theme',t);
-  themeBtn.innerHTML = t==='dark'
-    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
-    : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  theme=t;html.setAttribute('data-theme',t);
+  themeBtn.innerHTML=t==='dark'
+    ?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
+    :'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
 }
 themeBtn.addEventListener('click',()=>setTheme(theme==='dark'?'light':'dark'));
 
 // ============================================================
 // SEARCH
 // ============================================================
-document.getElementById('searchInput').addEventListener('input', e=>{
-  if(currentView !== 'tasks') switchView('tasks');
+document.getElementById('searchInput').addEventListener('input',e=>{
+  if(currentView!=='tasks')switchView('tasks');
   buildPhases(e.target.value);
 });
 
@@ -1118,26 +974,26 @@ document.getElementById('searchInput').addEventListener('input', e=>{
 // EXPORT CSV
 // ============================================================
 document.getElementById('exportBtn').addEventListener('click',()=>{
-  let csv = 'ID;Phase;Task;Description;Priority;Category;Status\n';
+  let csv='ID;Phase;Task;Description;Priority;Category;Status\n';
   Object.entries(TODOS).forEach(([phase,tasks])=>{
     tasks.forEach(t=>{
-      const status = state[t[0]]?'Completed':'Open';
-      csv += [t[0], phase.replace(/Phase \d+: /,''), t[1], t[2], PRIO_LABELS[t[3]], CAT_LABELS[t[4]], status].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')+'\n';
+      const status=state[t[0]]?'Completed':'Open';
+      csv+=[t[0],phase.replace(/Phase \d+: /,''),t[1],t[2],PRIO_LABELS[t[3]],CAT_LABELS[t[4]],status].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')+'\n';
     });
   });
-  const blob = new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
-  const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='SuperDo_Tasks.csv'; a.click();
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='SuperDo_Tasks.csv';a.click();
 });
 
 // ============================================================
 // REBUILD
 // ============================================================
-function rebuild() {
-  const q = document.getElementById('searchInput')?.value||'';
+function rebuild(){
+  const q=document.getElementById('searchInput')?.value||'';
   buildStatusBar();
   buildFilters();
   buildPhases(q);
-  if(currentView === 'dashboard') buildDashboard();
+  if(currentView==='dashboard')buildDashboard();
 }
 
 rebuild();
