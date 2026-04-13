@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebApp Demo</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap" rel="stylesheet" />
+
+  <!--
+    LADE-REIHENFOLGE (wichtig):
+    1. Theme    → definiert alle Farb-Custom-Properties
+    2. Tokens   → definiert Typografie, Abstände, Radien
+    3. Base     → Reset + globale Grundstile
+    4. Layout   → App-Shell, Header, Sidebar, Content, Footer
+    5. Components → wiederverwendbare UI-Bausteine
+  -->
+  <link rel="stylesheet" href="themes/dark.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+<!--
+  APP SHELL
+  CSS-Grid mit 4 Bereichen:
+    - app-header  (sticky, volle Breite)
+    - app-sidebar (fixe Breite, kann collapsed werden)
+    - app-content (flex-grow, vertikal scrollbar)
+    - app-footer  (sticky, volle Breite)
+-->
+<div class="app-shell" id="appShell">
+
+  <!-- ═══════════════════════════════════════════════
+       HEADER
+       ═══════════════════════════════════════════════ -->
+  <header class="app-header" role="banner">
+
+    <!-- Sidebar-Toggle -->
+    <button
+      class="btn-sidebar-toggle"
+      id="sidebarToggle"
+      aria-label="Seitenmenü schließen"
+      aria-expanded="true"
+      aria-controls="appSidebar"
+      title="Seitenmenü (Strg+B)"
+    >
+      <!-- Hamburger-Icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
+        <line x1="3" y1="6"  x2="21" y2="6"  />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+
+    <!-- Logo + App-Titel -->
+    <a href="#dashboard" class="header-logo" aria-label="Dashboard">
+      <!-- Inline-SVG Logo -->
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+           xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="28" height="28" rx="7" fill="currentColor" opacity="0.15"/>
+        <path d="M6 14 L11 9 L16 14 L21 9"
+              stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 19 L11 14 L16 19 L21 14"
+              stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+      </svg>
+      <span class="header-logo-text">WebApp Demo</span>
+    </a>
+
+    <!-- Header-Aktionen (rechts) -->
+    <div class="header-actions">
+      <!-- Online-Statusanzeige -->
+      <span class="status" aria-label="System online">
+        <span class="status-dot online" aria-hidden="true"></span>
+        <span style="color:var(--color-text-faint);font-size:var(--text-xs);">Online</span>
+      </span>
+
+      <!-- Benachrichtigungen -->
+      <button class="btn-icon" aria-label="Benachrichtigungen" title="Benachrichtigungen">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+             viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+      </button>
+
+      <!-- Benutzer-Avatar (Initialen) -->
+      <button class="btn-icon" aria-label="Benutzerprofil" title="Profil"
+              style="font-size:var(--text-xs);font-weight:700;
+                     background:var(--color-primary-highlight);
+                     color:var(--color-primary);
+                     border:1px solid var(--color-primary-highlight);">
+        JS
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════
+       SIDEBAR
+       ═══════════════════════════════════════════════ -->
+  <aside class="app-sidebar" id="appSidebar"
+         role="navigation" aria-label="Hauptnavigation">
+
+    <!-- Gruppe: Hauptmenü -->
+    <nav class="sidebar-section">
+      <span class="sidebar-section-label">Hauptmenü</span>
+      <ul class="sidebar-nav" role="list">
+
+        <li class="sidebar-nav-item active">
+          <a href="#dashboard" aria-current="page">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7"/>
+              <rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/>
+            </svg>
+            Dashboard
+            <span class="nav-dot" aria-hidden="true"></span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a href="#projekte">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+            Projekte
+            <span class="nav-dot" aria-hidden="true" style="display:none"></span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a href="#analyse">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+            Analyse
+            <span class="nav-dot" aria-hidden="true" style="display:none"></span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a href="#dokumente">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Dokumente
+            <span class="nav-dot" aria-hidden="true" style="display:none"></span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <hr class="divider" style="margin:0 var(--space-4)" aria-hidden="true"/>
+
+    <!-- Gruppe: System -->
+    <nav class="sidebar-section" style="padding-top:var(--space-3)">
+      <span class="sidebar-section-label">System</span>
+      <ul class="sidebar-nav" role="list">
+
+        <li class="sidebar-nav-item">
+          <a href="#einstellungen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06
+                        a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0
+                        v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06
+                        a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15
+                        a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9
+                        a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06
+                        A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0
+                        v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06
+                        a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9
+                        a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09
+                        a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            Einstellungen
+            <span class="nav-dot" aria-hidden="true" style="display:none"></span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a href="#hilfe">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            Hilfe
+            <span class="nav-dot" aria-hidden="true" style="display:none"></span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════════
+       CONTENT
+       Jede Seite = <section class="content-page" data-page="…">
+       Neue Seiten: einfach weiteres section-Element anfügen
+       und passenden Nav-Link in der Sidebar ergänzen.
+       ═══════════════════════════════════════════════ -->
+  <main class="app-content" id="appContent" role="main" tabindex="-1">
+
+    <!-- ── Dashboard ── -->
+    <section class="content-page" data-page="dashboard" aria-label="Dashboard">
+      <h1 class="section-heading">Dashboard</h1>
+      <p class="section-sub">
+        Willkommen in der Demo-WebApp. Hier findest du eine Übersicht der wichtigsten
+        Kennzahlen. Navigiere links im Menü zu den weiteren Bereichen.
+      </p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title"><span class="badge">NEU</span>&nbsp; Projekte</div>
+          <p class="card-body">Aktuell laufen <strong>12 aktive Projekte</strong>. Drei davon befinden sich in der finalen Review-Phase und werden in dieser Woche abgeschlossen.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Aufgaben</div>
+          <p class="card-body">Insgesamt <strong>47 offene Aufgaben</strong> verteilen sich auf 6 Entwickler. Die Burndown-Rate liegt bei 94 % des Wochentargets.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Performance</div>
+          <p class="card-body">Durchschnittliche Ladezeit: <strong>320 ms</strong>. LCP: 1,4 s &nbsp;·&nbsp; INP: 78 ms. Alle Core Web Vitals im grünen Bereich.</p>
+        </div>
+      </div>
+
+      <hr class="divider"/>
+
+      <!-- Layout-Infos – werden per JS gespiegelt -->
+      <h2 class="card-title" style="margin-bottom:var(--space-4)">System-Informationen</h2>
+      <div class="card" style="max-width:520px">
+        <div class="info-row">
+          <span class="info-label">Aktives Theme</span>
+          <span class="info-value"><span class="badge">themes/dark.css</span></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Sidebar</span>
+          <span class="info-value" id="sidebarStatus">Sichtbar</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Tastenkürzel</span>
+          <span class="info-value">
+            <code style="font-family:var(--font-mono);font-size:var(--text-xs);
+                         background:var(--color-surface-offset);
+                         padding:2px 6px;border-radius:var(--radius-sm);">Strg + B</code>
+          </span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Layout-Technik</span>
+          <span class="info-value">CSS Grid – App Shell</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Routing</span>
+          <span class="info-value">Hash-basiert (#seite)</span>
+        </div>
+      </div>
+
+      <!-- Füllinhalt zum Testen des vertikalen Scrollens -->
+      <hr class="divider"/>
+      <h2 class="card-title" style="margin-bottom:var(--space-4)">Scroll-Test</h2>
+      <p class="card-body" style="margin-bottom:var(--space-6);max-width:68ch">
+        Die folgenden Karten dienen ausschließlich dazu, genug Inhalt zu erzeugen, damit der
+        Content-Bereich tatsächlich vertikal scrollbar wird. Header und Footer bleiben dabei
+        immer fixiert sichtbar.
+      </p>
+      <div class="card-grid">
+        <div class="card"><div class="card-title">Block 1</div><p class="card-body">Demokarte für den Scroll-Test. Der Content-Bereich scrollt unabhängig von Header und Footer.</p></div>
+        <div class="card"><div class="card-title">Block 2</div><p class="card-body">Demokarte für den Scroll-Test. Beim Einblenden der Sidebar passt sich die Breite dynamisch an.</p></div>
+        <div class="card"><div class="card-title">Block 3</div><p class="card-body">Demokarte für den Scroll-Test. Der Slide-Effekt ist via CSS Grid Transition realisiert.</p></div>
+        <div class="card"><div class="card-title">Block 4</div><p class="card-body">Demokarte für den Scroll-Test. Neue Themes legen nur eine neue CSS-Datei im themes/-Ordner an.</p></div>
+        <div class="card"><div class="card-title">Block 5</div><p class="card-body">Demokarte für den Scroll-Test. Neue Seiten sind einfach ein weiteres content-page-Element.</p></div>
+        <div class="card"><div class="card-title">Block 6</div><p class="card-body">Demokarte für den Scroll-Test. Das Layout reagiert auf jede Fensterbreite ohne Media-Query-Brüche.</p></div>
+      </div>
+      <div class="card" style="margin-top:var(--space-5);text-align:center;padding:var(--space-10)">
+        <p style="color:var(--color-text-faint);font-size:var(--text-sm)">— Ende des Scroll-Tests —</p>
+      </div>
+    </section>
+
+    <!-- ── Projekte ── -->
+    <section class="content-page" data-page="projekte" aria-label="Projekte">
+      <h1 class="section-heading">Projekte</h1>
+      <p class="section-sub">Übersicht aller laufenden und abgeschlossenen Projekte im aktuellen Quartal.</p>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">WebApp Redesign</div>
+          <p class="card-body">Komplettes Redesign der Unternehmens-WebApp nach neuen UX-Guidelines. Angular 17, SCSS, Design-System.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">API-Migration</div>
+          <p class="card-body">Migration von REST zu GraphQL. TypeScript, NestJS, Apollo Server.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Teams-Integration</div>
+          <p class="card-body">Power Automate Flows und Teams-Tabs für interne Collaboration-Tools. Power Platform Canvas App.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Analyse ── -->
+    <section class="content-page" data-page="analyse" aria-label="Analyse">
+      <h1 class="section-heading">Analyse</h1>
+      <p class="section-sub">Performance-Kennzahlen und Nutzungsstatistiken der letzten 30 Tage.</p>
+      <div class="card" style="max-width:580px">
+        <div class="info-row"><span class="info-label">Seitenaufrufe (30 Tage)</span><span class="info-value">48.320</span></div>
+        <div class="info-row"><span class="info-label">Aktive Benutzer</span><span class="info-value">1.247</span></div>
+        <div class="info-row"><span class="info-label">Ø Sitzungsdauer</span><span class="info-value">4:32 min</span></div>
+        <div class="info-row"><span class="info-label">Absprungrate</span><span class="info-value">18,4 %</span></div>
+        <div class="info-row"><span class="info-label">Fehlerrate</span><span class="info-value" style="color:var(--color-success)">0,02 %</span></div>
+      </div>
+    </section>
+
+    <!-- ── Dokumente ── -->
+    <section class="content-page" data-page="dokumente" aria-label="Dokumente">
+      <h1 class="section-heading">Dokumente</h1>
+      <p class="section-sub">Technische Dokumentationen, Design-Specs und Projektunterlagen.</p>
+      <div class="empty-state">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+             stroke="currentColor" stroke-width="1.5"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="12" y1="18" x2="12" y2="12"/>
+          <line x1="9"  y1="15" x2="15" y2="15"/>
+        </svg>
+        <h3>Noch keine Dokumente</h3>
+        <p>Lade dein erstes Dokument hoch oder erstelle einen neuen Eintrag.</p>
+        <button class="btn btn-primary">Dokument erstellen</button>
+      </div>
+    </section>
+
+    <!-- ── Einstellungen ── -->
+    <section class="content-page" data-page="einstellungen" aria-label="Einstellungen">
+      <h1 class="section-heading">Einstellungen</h1>
+      <p class="section-sub">App-weite Konfigurationsoptionen. Themes werden als separate CSS-Dateien in <code style="font-family:var(--font-mono);font-size:var(--text-xs)">themes/</code> abgelegt.</p>
+      <div class="card" style="max-width:480px">
+        <div class="info-row"><span class="info-label">Aktives Theme</span><span class="info-value"><span class="badge">dark.css</span></span></div>
+        <div class="info-row"><span class="info-label">Sprache</span><span class="info-value">Deutsch (DE)</span></div>
+        <div class="info-row"><span class="info-label">Sidebar-Breite</span><span class="info-value">260 px (--sidebar-width)</span></div>
+        <div class="info-row"><span class="info-label">Header-Höhe</span><span class="info-value">56 px (--header-height)</span></div>
+        <div class="info-row"><span class="info-label">Footer-Höhe</span><span class="info-value">44 px (--footer-height)</span></div>
+      </div>
+    </section>
+
+    <!-- ── Hilfe ── -->
+    <section class="content-page" data-page="hilfe" aria-label="Hilfe">
+      <h1 class="section-heading">Hilfe &amp; Dokumentation</h1>
+      <p class="section-sub">Architektur-Überblick dieser Demo-WebApp und Hinweise zur Erweiterung.</p>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">Dateistruktur</div>
+          <p class="card-body" style="font-family:var(--font-mono);font-size:var(--text-xs);line-height:2">
+            index.html<br>
+            themes/dark.css<br>
+            css/tokens.css<br>
+            css/base.css<br>
+            css/layout.css<br>
+            css/components.css<br>
+            js/app.js
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">Neues Theme anlegen</div>
+          <p class="card-body">
+            Erstelle <code style="font-family:var(--font-mono);font-size:var(--text-xs)">themes/light.css</code> (oder einen anderen Namen) und überschreibe darin
+            ausschließlich die CSS Custom Properties. Binde die Datei in <code style="font-family:var(--font-mono);font-size:var(--text-xs)">index.html</code> statt
+            <code style="font-family:var(--font-mono);font-size:var(--text-xs)">dark.css</code> ein.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">Neue Seite hinzufügen</div>
+          <p class="card-body">
+            1. Füge ein <code style="font-family:var(--font-mono);font-size:var(--text-xs)">&lt;section class="content-page" data-page="meine-seite"&gt;</code> in
+            <code style="font-family:var(--font-mono);font-size:var(--text-xs)">#appContent</code> ein.<br>
+            2. Ergänze einen passenden <code style="font-family:var(--font-mono);font-size:var(--text-xs)">&lt;li&gt;</code>-Eintrag in der Sidebar mit
+            <code style="font-family:var(--font-mono);font-size:var(--text-xs)">href="#meine-seite"</code>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════ -->
+  <footer class="app-footer" role="contentinfo">
+    <span>WebApp Demo &copy; 2026</span>
+    <span style="color:var(--color-text-faint)">CSS Grid App Shell &bull; Dark Theme</span>
+  </footer>
+
+</div><!-- /.app-shell -->
+
+<!-- App-Logik -->
+<script src="js/app.js"></script>
+
+<!-- Sidebar-Status im Dashboard live spiegeln -->
+<script>
+  (function () {
+    const shell    = document.getElementById('appShell');
+    const statusEl = document.getElementById('sidebarStatus');
+    if (!shell || !statusEl) return;
+
+    new MutationObserver(() => {
+      statusEl.textContent = shell.classList.contains('sidebar-collapsed')
+        ? 'Ausgeblendet'
+        : 'Sichtbar';
+    }).observe(shell, { attributes: true, attributeFilter: ['class'] });
+  })();
+</script>
+
+</body>
+</html>
