@@ -1,0 +1,57 @@
+/* ============================================================
+   THEME: Dark
+   Alle Themes überschreiben ausschließlich CSS Custom
+   Properties. Layout und Komponenten bleiben unberührt.
+   ============================================================ */
+
+[data-theme="dark"],
+:root {
+  /* ── Surfaces ── */
+  --color-bg:                #111113;
+  --color-surface:           #18181b;
+  --color-surface-2:         #1d1d21;
+  --color-surface-offset:    #222226;
+  --color-surface-dynamic:   #2a2a30;
+  --color-divider:           #2e2e34;
+  --color-border:            #3a3a42;
+
+  /* ── Text ── */
+  --color-text:              #e4e4e8;
+  --color-text-muted:        #8b8b97;
+  --color-text-faint:        #55555f;
+  --color-text-inverse:      #111113;
+
+  /* ── Accent – Soft Cyan ── */
+  --color-primary:           #38bdf8;
+  --color-primary-hover:     #0ea5e9;
+  --color-primary-active:    #0284c7;
+  --color-primary-highlight: #0c2d3f;
+
+  /* ── Sidebar ── */
+  --color-sidebar-bg:        #16161a;
+  --color-sidebar-text:      #c4c4cc;
+  --color-sidebar-item-hover:#222228;
+  --color-sidebar-item-active:#1a3040;
+  --color-sidebar-border:    #2a2a32;
+
+  /* ── Header / Footer ── */
+  --color-header-bg:         #111113;
+  --color-header-border:     #2a2a32;
+  --color-footer-bg:         #111113;
+  --color-footer-border:     #2a2a32;
+
+  /* ── Toggle ── */
+  --color-toggle-bg:         #222228;
+  --color-toggle-hover:      #2a2a34;
+  --color-toggle-border:     #38384a;
+
+  /* ── Status ── */
+  --color-success:           #4ade80;
+  --color-warning:           #fb923c;
+  --color-error:             #f87171;
+
+  /* ── Shadows ── */
+  --shadow-sm:  0 1px 2px  oklch(0 0 0 / 0.35);
+  --shadow-md:  0 4px 14px oklch(0 0 0 / 0.45);
+  --shadow-lg:  0 12px 36px oklch(0 0 0 / 0.55);
+}
