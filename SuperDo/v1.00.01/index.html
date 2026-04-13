@@ -13,187 +13,281 @@
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/components.css" />
+  <style>
+    /* Inline styles for Workspace Logic */
+    .sidebar-empty-label {
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--text-sm);
+      color: var(--color-text-faint);
+      font-style: italic;
+    }
+    .ws-modal {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2000;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .ws-modal-visible { opacity: 1; pointer-events: auto; }
+    .ws-modal-content {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      width: 100%; max-width: 500px;
+      padding: var(--space-6);
+      box-shadow: var(--shadow-xl);
+    }
+    .ws-form-group { margin-bottom: var(--space-4); }
+    .ws-form-label { display: block; font-size: var(--text-sm); font-weight: 600; margin-bottom: var(--space-2); }
+    .ws-input {
+      width: 100%; padding: var(--space-3);
+      background: var(--color-surface-offset);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text);
+      font-size: var(--text-sm);
+    }
+    .ws-input:focus { border-color: var(--color-primary); outline: none; }
+    .ws-error { color: #ff5555; font-size: var(--text-xs); margin-top: var(--space-1); min-height: 1em; }
+    .ws-modal-actions { display: flex; justify-content: flex-end; gap: var(--space-3); margin-top: var(--space-6); }
+    
+    .ws-card-actions { margin-top: var(--space-4); display: flex; gap: var(--space-2); border-top: 1px solid var(--color-border); padding-top: var(--space-3); }
+    .btn-ghost { background: transparent; border: 1px solid var(--color-border); color: var(--color-text-muted); }
+    .btn-ghost:hover { background: var(--color-surface-offset); color: var(--color-text); border-color: var(--color-border-strong); }
+  </style>
 </head>
 <body>
-  <div class="app-shell" id="appShell">
-    <!-- Header -->
-    <header class="app-header" role="banner">
-      <button class="btn-sidebar-toggle" id="sidebarToggle" aria-label="Close sidebar" aria-expanded="true" aria-controls="appSidebar" title="Sidebar (Ctrl+B)">
+<div class="app-shell" id="appShell">
+  <!-- Header -->
+  <header class="app-header" role="banner">
+    <button class="btn-sidebar-toggle" id="sidebarToggle" aria-label="Close sidebar" aria-expanded="true" aria-controls="appSidebar" title="Sidebar (Ctrl+B)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+    <a href="#dashboard" class="header-logo" aria-label="Dashboard">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="28" height="28" rx="7" fill="currentColor" opacity="0.15"/>
+        <path d="M6 14 L11 9 L16 14 L21 9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 19 L11 14 L16 19 L21 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+      </svg>
+      <span class="header-logo-text">SuperDo</span>
+    </a>
+    <div class="header-actions">
+      <span class="status" aria-label="System online">
+        <span class="status-dot online" aria-hidden="true"></span>
+        <span style="color:var(--color-text-faint);font-size:var(--text-xs);">Online</span>
+      </span>
+      <button class="btn-icon" aria-label="Notifications" title="Notifications">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="3" y1="6" x2="21" y2="6" />
-          <line x1="3" y1="12" x2="21" y2="12" />
-          <line x1="3" y1="18" x2="21" y2="18" />
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
         </svg>
       </button>
-      <a href="#dashboard" class="header-logo" aria-label="Dashboard">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="28" height="28" rx="7" fill="currentColor" opacity="0.15"/>
-          <path d="M6 14 L11 9 L16 14 L21 9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M6 19 L11 14 L16 19 L21 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
-        </svg>
-        <span class="header-logo-text">SuperDo</span>
-      </a>
-      <div class="header-actions">
-        <span class="status" aria-label="System online">
-          <span class="status-dot online" aria-hidden="true"></span>
-          <span style="color:var(--color-text-faint);font-size:var(--text-xs);">Online</span>
-        </span>
-        <button class="btn-icon" aria-label="Notifications" title="Notifications">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-          </svg>
-        </button>
-        <button class="btn-icon" aria-label="User Profile" title="Profile" style="font-size:var(--text-xs);font-weight:700; background:var(--color-primary-highlight); color:var(--color-primary); border:1px solid var(--color-primary-highlight);">JS</button>
+      <button class="btn-icon" aria-label="User Profile" title="Profile" style="font-size:var(--text-xs);font-weight:700; background:var(--color-primary-highlight); color:var(--color-primary); border:1px solid var(--color-primary-highlight);">JS</button>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="app-sidebar" id="appSidebar" role="navigation" aria-label="Main Navigation">
+    <nav class="sidebar-section">
+      <span class="sidebar-section-label">MAIN MENU</span>
+      <ul class="sidebar-nav" role="list">
+        <li class="sidebar-nav-item" data-page="dashboard">
+          <a href="#dashboard">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item" data-page="workspace">
+          <a href="#workspace">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            <span>Workspace</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item" data-page="analysis">
+          <a href="#analysis">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <span>Analysis</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <hr style="border:0; border-top:1px solid var(--color-sidebar-border); margin:var(--space-2) var(--space-3);">
+    <nav class="sidebar-section">
+      <span class="sidebar-section-label">DESKTOP</span>
+      <ul class="sidebar-nav" id="desktopNavList" role="list">
+        <!-- Dynamically filled -->
+        <li class="sidebar-nav-item sidebar-empty-item">
+          <span class="sidebar-empty-label">Empty \uD83D\uDE41</span>
+        </li>
+      </ul>
+    </nav>
+    <hr style="border:0; border-top:1px solid var(--color-sidebar-border); margin:var(--space-2) var(--space-3);">
+    <nav class="sidebar-section" style="margin-top:auto;">
+      <span class="sidebar-section-label">SYSTEM</span>
+      <ul class="sidebar-nav" role="list">
+        <li class="sidebar-nav-item" data-page="settings">
+          <a href="#settings">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span>Settings</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item" data-page="help">
+          <a href="#help">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span>Help</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item" data-page="info">
+          <a href="#info">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>Info</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Content -->
+  <main class="app-content" id="appContent">
+    
+    <!-- Page: Dashboard -->
+    <section class="content-page" data-page="dashboard">
+      <h1 class="section-heading">Dashboard</h1>
+      <p class="section-sub">Welcome to SuperDo. Here you can find an overview of your key metrics.</p>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title"><span class="badge">NEW</span> Projects</div>
+          <div class="card-body">Currently <strong>12 active projects</strong> are running.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Tasks</div>
+          <div class="card-body">A total of <strong>47 open tasks</strong> are distributed.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Performance</div>
+          <div class="card-body">Average load time: <strong>320 ms</strong>.</div>
+        </div>
       </div>
-    </header>
-    <!-- Sidebar -->
-    <aside class="app-sidebar" id="appSidebar" role="navigation" aria-label="Main Navigation">
-      <nav class="sidebar-section">
-        <span class="sidebar-section-label">MAIN MENU</span>
-        <ul class="sidebar-nav" role="list">
-          <li class="sidebar-nav-item active">
-            <a href="#dashboard" aria-current="page">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-              </svg>
-              Dashboard <span class="nav-dot" aria-hidden="true"></span>
-            </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a href="#workspace">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-              </svg>
-              Workspace <span class="nav-dot" aria-hidden="true" style="display:none"></span>
-            </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a href="#analysis">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-              </svg>
-              Analysis <span class="nav-dot" aria-hidden="true" style="display:none"></span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <hr class="divider" style="margin:0 var(--space-4)" aria-hidden="true"/>
-      <nav class="sidebar-section" style="padding-top:var(--space-3)">
-        <span class="sidebar-section-label">DESKTOP</span>
-        <ul class="sidebar-nav" id="sidebarWorkspaceList" role="list">
-          <li class="sidebar-nav-item-empty" id="sidebarEmptyLabel">Empty 🙁</li>
-        </ul>
-      </nav>
-      <hr class="divider" style="margin:0 var(--space-4)" aria-hidden="true"/>
-      <nav class="sidebar-section" style="padding-top:var(--space-3)">
-        <span class="sidebar-section-label">SYSTEM</span>
-        <ul class="sidebar-nav" role="list">
-          <li class="sidebar-nav-item"><a href="#settings">Settings</a></li>
-          <li class="sidebar-nav-item"><a href="#help">Help</a></li>
-          <li class="sidebar-nav-item"><a href="#info">Info</a></li>
-        </ul>
-      </nav>
-    </aside>
-    <!-- Content -->
-    <main class="app-content" id="appContent" role="main" tabindex="-1">
-      <!-- Dashboard -->
-      <section class="content-page active" data-page="dashboard" aria-label="Dashboard">
-        <h1 class="section-heading">Dashboard</h1>
-        <p class="section-sub">Welcome to SuperDo. Here you can find an overview of your key metrics.</p>
-        <div class="card-grid">
-          <div class="card"><div class="card-title"><span class="badge">NEW</span> Projects</div><p class="card-body">Currently <strong>12 active projects</strong> are running.</p></div>
-          <div class="card"><div class="card-title">Tasks</div><p class="card-body">A total of <strong>47 open tasks</strong> are distributed.</p></div>
-          <div class="card"><div class="card-title">Performance</div><p class="card-body">Average load time: <strong>320 ms</strong>.</p></div>
-        </div>
-        <hr class="divider"/>
-        <h2 class="card-title" style="margin-bottom:var(--space-4)">System Information</h2>
-        <div class="card" style="max-width:520px">
-          <div class="info-row"><span class="info-label">Active Theme</span><span class="info-value"><span class="badge">themes/dark.css</span></span></div>
-          <div class="info-row"><span class="info-label">Sidebar</span><span class="info-value" id="sidebarStatus">Visible</span></div>
-          <div class="info-row"><span class="info-label">Shortcuts</span><span class="info-value"><code>Ctrl + B</code></span></div>
-          <div class="info-row"><span class="info-label">Layout Engine</span><span class="info-value">CSS Grid – App Shell</span></div>
-          <div class="info-row"><span class="info-label">Routing</span><span class="info-value">Hash-based (#page)</span></div>
-        </div>
-      </section>
-      <!-- Workspace -->
-      <section class="content-page" data-page="workspace" aria-label="Workspace">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-2);">
-          <h1 class="section-heading">Workspace</h1>
-          <button class="btn btn-primary btn-create-ws" id="btnCreateWsHeader" style="display:none">Create New Workspace</button>
-        </div>
-        <p class="section-sub">Manage your projects and tasks in your personal workspace.</p>
-        <div id="workspaceEmptyState" class="empty-state">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-          </svg>
-          <h3>No Workspace selected</h3>
-          <p>Please select a workspace from the sidebar or create a new one.</p>
-          <button class="btn btn-primary btn-create-ws">Create New Workspace</button>
-        </div>
-        <div id="workspaceGrid" class="card-grid" style="display:none"></div>
-      </section>
-      <!-- Analysis -->
-      <section class="content-page" data-page="analysis" aria-label="Analysis">
-        <h1 class="section-heading">Analysis</h1>
-        <p class="section-sub">Performance metrics and usage statistics for the last 30 days.</p>
-        <div class="card" style="max-width:580px">
-          <div class="info-row"><span class="info-label">Page Views (30 days)</span><span class="info-value">48,320</span></div>
-          <div class="info-row"><span class="info-label">Active Users</span><span class="info-value">1,247</span></div>
-          <div class="info-row"><span class="info-label">Avg. Session Duration</span><span class="info-value">4:32 min</span></div>
-          <div class="info-row"><span class="info-label">Bounce Rate</span><span class="info-value">18.4%</span></div>
-          <div class="info-row"><span class="info-label">Error Rate</span><span class="info-value" style="color:var(--color-success)">0.02%</span></div>
-        </div>
-      </section>
-      <!-- Settings -->
-      <section class="content-page" data-page="settings" aria-label="Settings">
-        <h1 class="section-heading">Settings</h1>
-        <p class="section-sub">App-wide configuration options.</p>
-        <div class="card" style="max-width:480px">
-          <div class="info-row"><span class="info-label">Active Theme</span><span class="info-value"><span class="badge">dark.css</span></span></div>
-          <div class="info-row"><span class="info-label">Language</span><span class="info-value">English (EN)</span></div>
-          <div class="info-row"><span class="info-label">Sidebar Width</span><span class="info-value">260 px</span></div>
-        </div>
-      </section>
-      <!-- Help -->
-      <section class="content-page" data-page="help" aria-label="Help">
-        <h1 class="section-heading">Help & Documentation</h1>
-        <p class="section-sub">Overview and instructions for SuperDo.</p>
-        <div class="card-grid">
-          <div class="card"><div class="card-title">File Structure</div><p class="card-body" style="font-family:var(--font-mono);font-size:var(--text-xs);line-height:2">index.html<br>themes/dark.css<br>css/tokens.css<br>css/base.css<br>css/layout.css<br>css/components.css<br>js/app.js</p></div>
-        </div>
-      </section>
-      <!-- Info -->
-      <section class="content-page" data-page="info" aria-label="Info">
-        <h1 class="section-heading">Info</h1>
-        <p class="section-sub">About SuperDo v1.00.01</p>
-        <div class="card"><p class="card-body">SuperDo is a modern ToDo and project management WebApp template.</p></div>
-      </section>
-    </main>
-    <!-- Footer -->
-    <footer class="app-footer" role="contentinfo">
-      <span>SuperDo © 2026</span>
-      <span style="color:var(--color-text-faint)">SuperDo App Shell • Dark Theme</span>
-    </footer>
-  </div>
-  <!-- Modal for Workspace Creation -->
-  <div id="wsModal" class="modal-overlay" style="display:none">
-    <div class="modal-content">
-      <h2>Create New Workspace</h2>
-      <div class="form-group" style="margin-bottom:var(--space-4)">
-        <label for="wsName" style="display:block; margin-bottom:var(--space-2); font-size:var(--text-sm);">Workspace Name (max. 80 chars)</label>
-        <input type="text" id="wsName" maxlength="80" placeholder="e.g. MyProjectX" style="width:100%; padding:var(--space-3); background:var(--color-surface-offset); border:1px solid var(--color-border); border-radius:var(--radius-md); color:var(--color-text);">
+      <hr style="border:0; border-top:1px solid var(--color-border); margin:var(--space-10) 0;">
+      <h2 style="font-size:var(--text-lg); margin-bottom:var(--space-6);">System Information</h2>
+      <div style="max-width:600px;">
+        <div class="info-row"><span class="info-label">Active Theme</span><span class="info-value"><span class="badge" style="background:var(--color-surface-offset); color:var(--color-primary); border:1px solid var(--color-border);">themes/dark.css</span></span></div>
+        <div class="info-row"><span class="info-label">Sidebar</span><span class="info-value">Visible</span></div>
+        <div class="info-row"><span class="info-label">Shortcuts</span><span class="info-value"><code>Ctrl + B</code></span></div>
+        <div class="info-row"><span class="info-label">Layout Engine</span><span class="info-value">CSS Grid \u2013 App Shell</span></div>
+        <div class="info-row"><span class="info-label">Routing</span><span class="info-value">Hash-based (#page)</span></div>
       </div>
-      <div class="form-group" style="margin-bottom:var(--space-6)">
-        <label for="wsDesc" style="display:block; margin-bottom:var(--space-2); font-size:var(--text-sm);">Description (max. 500 chars)</label>
-        <textarea id="wsDesc" maxlength="500" placeholder="A short description..." style="width:100%; height:100px; padding:var(--space-3); background:var(--color-surface-offset); border:1px solid var(--color-border); border-radius:var(--radius-md); color:var(--color-text); resize:none;"></textarea>
+    </section>
+
+    <!-- Page: Workspace -->
+    <section class="content-page" data-page="workspace" id="workspacePage">
+      <h1 class="section-heading">Workspace</h1>
+      <p class="section-sub">Manage your projects and tasks in your personal workspace.</p>
+      
+      <!-- Empty State View -->
+      <div id="wsEmptyView" class="empty-state">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+        <h3>No Workspace found</h3>
+        <p>Please create a new workspace to start organizing your tasks and projects.</p>
+        <button class="btn btn-primary ws-create-btn">Create New Workspace</button>
       </div>
-      <div class="modal-actions" style="display:flex; justify-content:flex-end; gap:var(--space-3);">
-        <button class="btn" id="btnCancelWs">Cancel</button>
-        <button class="btn btn-primary" id="btnSaveWs">Save Workspace</button>
+
+      <!-- List View -->
+      <div id="wsListView" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-6);">
+          <h2 style="font-size:var(--text-lg); font-weight:600;">Your Workspaces</h2>
+          <button class="btn btn-primary ws-create-btn">+ New Workspace</button>
+        </div>
+        <div id="wsCardGrid" class="card-grid">
+          <!-- Cards injected via JS -->
+        </div>
       </div>
+    </section>
+
+    <!-- Page: Analysis -->
+    <section class="content-page" data-page="analysis">
+      <h1 class="section-heading">Analysis</h1>
+      <p class="section-sub">Performance metrics and usage statistics for the last 30 days.</p>
+      <div class="card-grid">
+        <div class="card"><div class="info-row"><span class="info-label">Page Views (30 days)</span><span class="info-value">48,320</span></div></div>
+        <div class="card"><div class="info-row"><span class="info-label">Active Users</span><span class="info-value">1,247</span></div></div>
+        <div class="card"><div class="info-row"><span class="info-label">Avg. Session Duration</span><span class="info-value">4:32 min</span></div></div>
+        <div class="card"><div class="info-row"><span class="info-label">Bounce Rate</span><span class="info-value">18.4%</span></div></div>
+        <div class="card"><div class="info-row"><span class="info-label">Error Rate</span><span class="info-value">0.02%</span></div></div>
+      </div>
+    </section>
+
+    <!-- Page: Settings -->
+    <section class="content-page" data-page="settings">
+      <h1 class="section-heading">Settings</h1>
+      <p class="section-sub">App-wide configuration options.</p>
+      <div class="info-row"><span class="info-label">Active Theme</span><span class="info-value">dark.css</span></div>
+      <div class="info-row"><span class="info-label">Language</span><span class="info-value">English (EN)</span></div>
+      <div class="info-row"><span class="info-label">Sidebar Width</span><span class="info-value">260 px</span></div>
+    </section>
+
+    <!-- Page: Help -->
+    <section class="content-page" data-page="help">
+      <h1 class="section-heading">Help & Documentation</h1>
+      <p class="section-sub">Overview and instructions for SuperDo.</p>
+      <h3 style="margin-bottom:var(--space-2);">File Structure</h3>
+      <code style="display:block; padding:var(--space-4); background:var(--color-surface-offset); border-radius:var(--radius-md); line-height:1.6;">
+        index.html <br>
+        themes/dark.css <br>
+        css/tokens.css <br>
+        css/base.css <br>
+        css/layout.css <br>
+        css/components.css <br>
+        js/app.js
+      </code>
+    </section>
+
+    <!-- Page: Info -->
+    <section class="content-page" data-page="info">
+      <h1 class="section-heading">Info</h1>
+      <p class="section-sub">About SuperDo v1.00.01</p>
+      <div class="card">
+        <div class="card-body">
+          SuperDo is a modern ToDo and project management WebApp template.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <span>SuperDo &copy; 2026</span>
+    <span>SuperDo App Shell &bull; Dark Theme</span>
+  </footer>
+</div>
+
+<!-- Workspace Modal -->
+<div id="wsModal" class="ws-modal">
+  <div class="ws-modal-content">
+    <h2 style="margin-bottom:var(--space-6); font-size:var(--text-lg); font-weight:700;">Create New Workspace</h2>
+    <div class="ws-form-group">
+      <label class="ws-form-label" for="wsName">Workspace Name (max. 80 chars)</label>
+      <input type="text" id="wsName" class="ws-input" maxlength="80" placeholder="e.g. MyProjectX">
+      <div id="wsNameError" class="ws-error"></div>
+    </div>
+    <div class="ws-form-group">
+      <label class="ws-form-label" for="wsDescription">Description (max. 500 chars)</label>
+      <textarea id="wsDescription" class="ws-input" maxlength="500" rows="4" placeholder="Briefly describe the workspace..."></textarea>
+    </div>
+    <div class="ws-modal-actions">
+      <button class="btn btn-ghost" id="wsModalCancel">Cancel</button>
+      <button class="btn btn-primary" id="wsModalSave">Save Workspace</button>
     </div>
   </div>
-  <script src="js/app.js"></script>
+</div>
+
+<script src="js/app.js"></script>
 </body>
 </html>
