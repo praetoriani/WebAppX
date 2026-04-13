@@ -1,3 +1,4 @@
 # .gitignore for WebAppX
 *.afphoto
 Layout.png
+/SuperDo/.backup
